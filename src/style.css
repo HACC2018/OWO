@@ -1,0 +1,14 @@
+div.Navi{
+    text-align: justify;
+    color: blue;
+    font-size: 14px;
+    background-color: beige;
+    font-family: Niramit;
+}
+
+img{
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
