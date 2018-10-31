@@ -29,7 +29,9 @@
       items: [
           {name: "HI-5 Recyclable Plastic Containers (1 & 2s)", [{ weight: 1.75, volume: 11} ]},
           {name: "Food wrappers (chip bags, bar wrappers, ziplocks)", [{ weight: 1.85, volume: 16.5} ]},
-          {name: "Plastic food containers", [ {weight: 1.85, volume: 16.5} ]}, 
+          {name: "Plastic food containers", [ {weight: 5.2, volume: 38.5}, {weight: 3.3, volume: 11} ]},
+          {name: "Styrofoam", [{ weight: 1.1, volume: 5.5} ]},
+          {name: "Other Plastic", [{ weight: 11.35, volume: 44},{ weight: 13.35, volume: 49.5 } ]}   
       ]
 
   }
