@@ -1,0 +1,37 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  }
+   
+  "Items of Interest": {
+      name: "Items of Interest",
+      items: [
+          {name: "Starbucks cups", [ {weight: 3.1, volume: 13.75} ]},
+          {name: "Plastic to-go cups", [ {weight: 2.65, volume: 11} ]},
+          {name: "Wax paper cups", [ {weight: 3.2, volume: 11} ]},
+          {name: "Compostable take-out", [ {weight: 6.15, volume: 35.75} ]},
+          {name: "Disposable utensils", [ {weight: 2.25, volume: 4} ]},
+          {name: "Straws", [ {weight: 0.05, volume: 2.5} ]}
+      ]
+  },
+
+  "Paper": {
+      name: "Paper",
+      items: [
+          {name: "Recyclable paper", bags: [{ weight: 9.6, volume: 38.5 } ]},
+          {name: "Non-recyclable paper", [{ weight: 8.75, volume: 33} ]},
+          {name: "Paper towels", [{ weight: 16.75, volume: 44} ]}
+      ]
+  }
+  
+  "Plastic": {
+      name: "Plastic",
+      items: [
+          {name: "HI-5 Recyclable Plastic Containers (1 & 2s)", [{ weight: 1.75, volume: 11} ]},
+          {name: "Food wrappers (chip bags, bar wrappers, ziplocks)", [{ weight: 1.85, volume: 16.5} ]},
+          {name: "Plastic food containers", [ {weight: 1.85, volume: 16.5} ]}, 
+      ]
+
+  }
+  
+}
