@@ -1,3 +1,2 @@
 *.iml
-Node_Modules
-.json
+.idea/
