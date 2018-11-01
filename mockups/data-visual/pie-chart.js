@@ -1,11 +1,24 @@
 Highcharts.chart('container', {
 
   title: {
-    text: 'Pie point CSS'
+    text: 'Trash Audit of Building XX'
   },
 
-  xAxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  tooltip: {
+    pointFormat: '<b>{point.y} Lbs</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.y} Lbs',
+        style: {
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
+      }
+    }
   },
 
   series: [{
@@ -24,3 +37,4 @@ Highcharts.chart('container', {
     showInLegend: true
   }]
 });
+
