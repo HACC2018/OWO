@@ -1,10 +1,25 @@
+const firebase = require("firebase");
+require("firebase/firestore");
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+  authDomain: "oooooo-1cb0d.firebaseapp.com",
+  databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+  projectId: "oooooo-1cb0d",
+  storageBucket: "oooooo-1cb0d.appspot.com",
+  messagingSenderId: "928900583874"
+};
+firebase.initializeApp(config);
+var db = firebase.firestore();
+db.settings({timestampsInSnapshots: true})
+
 class CategorySelect extends HTMLElement {
-	
-	
-	constructor() {
+constructor() {
 		// Always call super first in constructor
 		super();
-		
+
+
 		let pickerOpen = false;
 		let selected = this.getAttribute("selected");
 		
@@ -198,6 +213,7 @@ class CategorySelect extends HTMLElement {
 		display.appendChild(arrow);
 		wrapper.appendChild(picker);
 	}
+
 	
 	connectedCallback() {
 		let selected = this.getAttribute("selected");
@@ -209,3 +225,4 @@ class CategorySelect extends HTMLElement {
 }
 
 customElements.define("category-select", CategorySelect);
+
