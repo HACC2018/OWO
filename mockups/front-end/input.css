@@ -64,3 +64,53 @@ button {
 	font-size: 14px;
 	cursor: pointer;
 }
+
+hr {
+	width: 80%;
+	height: 1px;
+	margin: 50px auto;
+	border: none;
+	background: #FFF;
+}
+
+.footer {
+	width: 100%;
+	padding: 50px 20px 75px 20px;
+	background: #308BFF;
+	color: #FFF;
+	text-align: center;
+}
+
+.fab {
+/*	display: inline-flex;*/
+	min-width: 128px;
+	height: 48px;
+	margin: 0;
+	padding: 0 24px;
+	border-radius: 24px;
+	font-size: 16px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 48px;
+	box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+.fab.circle {
+	display: inline-block;
+	min-width: unset;
+	width: 48px;
+	height: 48px;
+	padding: 0;
+	text-align: center;
+	font-size: 32px;
+}
+
+.fab.icon {
+	padding-left: 0;
+}
+
+.fab .icon {
+	display: inline-block;
+	margin: 0 17px 0 11px;
+	font-size: 28px;
+}

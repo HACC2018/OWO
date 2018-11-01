@@ -1,6 +1,4 @@
 class CategorySelect extends HTMLElement {
-	
-	
 	constructor() {
 		// Always call super first in constructor
 		super();
@@ -95,26 +93,6 @@ class CategorySelect extends HTMLElement {
 		for (let i = 0; i < items.length; i++) {
 			post(items[i], 1);
 		}
-		
-//		let item1 = document.createElement("div");
-//		item1.className = "item";
-//		item1.innerText = "Paper";
-//		picker.appendChild(item1);
-//		
-//		let item2 = document.createElement("div");
-//		item2.className = "item subitem";
-//		item2.innerText = "Recyclable Paper";
-//		picker.appendChild(item2);
-//		
-//		let item3 = document.createElement("div");
-//		item3.className = "item";
-//		item3.innerText = "Plastic";
-//		picker.appendChild(item3);
-//		
-//		let item4 = document.createElement("div");
-//		item4.className = "item subitem";
-//		item4.innerText = "Starbucks Cups";
-//		picker.appendChild(item4);
 		
 		display.addEventListener("click", (event) => {
 			pickerOpen = !pickerOpen;

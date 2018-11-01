@@ -3,6 +3,11 @@
 	<head>
 		<title>Audit Data - OWO</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script src="input.js"></script>
+		<link href="input.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
+		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
+<!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
 		<style>
 			.header {
 				display: flex;
@@ -65,16 +70,6 @@
 				line-height: 18px;
 			}
 			
-			.fab {
-				min-width: 128px;
-				height: 48px;
-				margin: 0;
-				padding: 0;
-				border-radius: 24px;
-				font-size: 16px;
-				line-height: 48px;
-			}
-			
 			.delete {
 				position: absolute;
 				top: 6px;
@@ -95,15 +90,10 @@
 				padding: 0;
 			}
 		</style>
-		<script src="input.js"></script>
-		<link href="input.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
-		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
-<!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
 	</head>
 	<body>
 		<div class="header">
-			<div class="item">Organizing our Waste on Oʻahu</div>
+			<div class="item">Oʻahu Waste Organization</div>
 			<div class="item">Events</div>
 			<div class="item">About</div>
 			<div class="item">Contact Us</div>
@@ -129,83 +119,62 @@
 			<div class="hide-whitespace">
 				<div class="data-category">
 					<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
-<!--					<div class="show-whitespace delete" style="font-size: 28px; color: #545454;"><span class="mdi mdi-trash-can-outline"></span></div>-->
 					<h3>Category</h3>
 					<category-select selected="Recyclable Paper"></category-select>
-<!--
-					<select class="data-content">
-						<option>Starbucks Cups</option>
-						<option selected>Recyclable Paper</option>
-					</select>
--->
 					<div class="data-category category-label" data-label="Bag #1">
 						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
-<!--
-						<div>
-							<h3 style="display: inline-block; position: relative; top: 0px; padding: 0 5px; transform: translateY(-120%); background: #FFF">Bag 1</h3>
-						</div>
--->
 						<div class="half">
 							<h3>Weight (lbs)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
-<!--
-							<div>
-								<div class="data-content" style="border: none; border-bottom: 1px solid #DADCE0; padding: 2px 8px; outline: none; border-radius: 4px 4px 0 0; background: #F5F5F5; box-sizing: border-box;">
-									<div>Recyclable Paper</div>
-								</div>
-								<div class="show-whitespace" style="position: absolute; border: 1px solid #000; background: #FFF; z-index: 999999;">
-									<div class="data-content" style="padding: 3px 8px;">Starbucks Cups</div>
-									<div class="data-content" style="padding: 3px 8px;">Recyclable Paper</div>
-								</div>
-							</div>
--->
 						</div>
 						<div class="half">
-							<h3>Volume</h3>
+							<h3>Volume (gal)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
 						</div>
 					</div>
 					<div class="data-category category-label" data-label="Bag #2">
+						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
 						<div class="half">
 							<h3>Weight (lbs)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
 						</div>
 						<div class="half">
-							<h3>Volume</h3>
+							<h3>Volume (gal)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
 						</div>
 					</div>
-					<div style="text-align: right;">
-						<button class="fab"><div class="mdi mdi-plus" style="display: inline-block; font-size: 36px;"></div> Bag</button>
+					<div style="position: relative; text-align: right;">
+						<button class="fab icon"><span class="icon mdi mdi-plus"></span>Bag</button>
 					</div>
 				</div>
 				<div class="data-category">
+					<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
 					<h3>Category</h3>
-					<select class="data-content">
-						<option selected>Starbucks Cups</option>
-						<option>Recyclable Paper</option>
-					</select>
+					<category-select selected="Recyclable Paper"></category-select>
 					<div class="data-category category-label" data-label="Bag #1">
+						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
 						<div class="half">
 							<h3>Weight (lbs)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
 						</div>
 						<div class="half">
-							<h3>Volume</h3>
+							<h3>Volume (gal)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
 						</div>
 					</div>
 					<div style="text-align: right;">
-						<button>Add Bag</button>
+						<button class="fab icon"><span class="icon mdi mdi-plus"></span>Bag</button>
 					</div>
-					<div style="margin-top: 15px; text-align: right;">
-							<button style="background: #F44336;">Remove Category</button>
-						</div>
 				</div>
-				<div style="text-align: right; position: fixed; bottom: 20px; right: 20px;">
-					<button>Add Category</button>
+				<div style="text-align: right; position: sticky; bottom: 20px; right: 20px;">
+					<button class="fab icon"><div class="icon mdi mdi-plus" style="margin-right: 5px; font-size: 28px;"></div><span style="font-size: 24px;">/</span><div class="icon mdi mdi-magnify" style="margin-left: 7px; font-size: 24px"></div>Category</button>
 				</div>
 			</div>
+		</div>
+		<div class="footer">
+			Oʻahu Waste Organization
+			<hr>
+			A team project for HACC 2018
 		</div>
 	</body>
 </html>
