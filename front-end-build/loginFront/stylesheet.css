@@ -13,7 +13,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 .login-button {
-  background-color: #4CAF50;
+  background-color: cadetblue;
   color: white;
   padding: 15px 28px;
   font-size: 16px;
