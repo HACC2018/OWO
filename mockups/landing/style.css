@@ -1,9 +1,15 @@
   .navbar {
-      background-color: black;
+    background-color: black;
     width: 100%;
     text-align: center;
     > li {
       float: none;
       display: inline-block;
     }
+  }
+
+  .grad-background {
+    background: url('http://www.hawaii.edu/news/attachments/img8876_7609l.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 500px;
   }
