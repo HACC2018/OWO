@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>DB Input</title>
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// Initialize Firebase
+				let config = {
+					apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+					authDomain: "oooooo-1cb0d.firebaseapp.com",
+					databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+					projectId: "oooooo-1cb0d",
+					storageBucket: "oooooo-1cb0d.appspot.com",
+					messagingSenderId: "928900583874"
+				};
+				firebase.initializeApp(config);
+
+				let db = firebase.firestore();
+				db.settings({timestampsInSnapshots: true});
+				
+				let testDoc = db.collection("locations").doc("uh-manoa-test");
+				let bldgID = document.getElementById("id");
+				let bldgName = document.getElementById("name");
+				let bldgLat = document.getElementById("lat");
+				let bldgLng = document.getElementById("lng");
+				
+				function addItem() {
+					testDoc.set({
+						"buildings": {
+							[bldgID.value]: {
+								name: bldgName.value,
+								location: new firebase.firestore.GeoPoint(Number(bldgLat.value), Number(bldgLng.value))
+							}
+						}
+					}, {merge: true}).then(() => {
+						alert("Good");
+					});
+				}
+				
+				document.getElementById("form").addEventListener("submit", (event) => {
+					event.preventDefault();
+					addItem();
+				});
+				
+				document.getElementById("submit").addEventListener("click", (event) => {
+					event.preventDefault();
+					addItem();
+				});
+			});
+		</script>
+		<style>
+			form {
+				width: 500px;
+				margin: auto;
+			}
+			
+			.form-row {
+				display: flex;
+				width: 100%;
+				padding: 5px 0;
+			}
+			
+			label {
+				display: inline-block;
+				width: 150px;
+			}
+			
+			.form-row input {
+				flex: 1;
+			}
+			
+			form button {
+				display: block;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="form">
+			<h1>Buildings</h1>
+			<div class="form-row"><label for="id">Building ID</label><input id="id"></div>
+			<div class="form-row"><label for="name">Building Name</label><input id="name"></div>
+			<div class="form-row"><label for="lat">Building Latitude</label><input id="lat" type="number"></div>
+			<div class="form-row"><label for="lng">Building Longitude</label><input id="lng" type="number"></div>
+			<div class="form-row"><button id="submit">Add</button></div>
+		</form>
+	</body>
+</html>

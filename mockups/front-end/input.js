@@ -239,6 +239,7 @@ class CategoryBag extends HTMLElement {
 		let style = document.createElement("style");
 		style.textContent = `
 @import "input.css";
+@import "global.css";
 @import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 
@@ -275,6 +276,7 @@ class CategoryBox extends HTMLElement {
 		let bag = document.createElement("category-bag");
 
 		let div = document.createElement("div");
+		div.className = "right";
 
 		let button = document.createElement("button");
 		button.className = "fab icon";
@@ -284,32 +286,21 @@ class CategoryBox extends HTMLElement {
 
 		let buttonLabel = document.createTextNode("Bag");
 
-		// wrapper.appendChild(del);
-		// del.appendChild(delspan);
-		// wrapper.appendChild(h3);
-		// wrapper.appendChild(categorySelect);
-		// wrapper.appendChild(bag);
-		// wrapper.appendChild(div);
-		// div.appendChild(button);
-		// button.appendChild(buttonspan);
-		// button.appendChild(buttonLabel);
+		 wrapper.appendChild(del);
+		 del.appendChild(delspan);
+		 wrapper.appendChild(h3);
+		 wrapper.appendChild(categorySelect);
+		 wrapper.appendChild(bag);
+		 wrapper.appendChild(div);
+		 div.appendChild(button);
+		 button.appendChild(buttonspan);
+		 button.appendChild(buttonLabel);
 
 		let style = document.createElement("style");
 		style.textContent = `
-.data-category {
-	position: relative;
-	margin: 24px 0 8px 0;
-	padding: 15px;
-	border-radius: 4px;
-	border: 1px solid #DADCE0;
-	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
-}
-
-.delete {
-	position: absolute;
-	top: 6px;
-	right: 6px;
-}
+@import "input.css";
+@import "global.css";
+@import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 
 		// Attach the created elements to the shadow dom
