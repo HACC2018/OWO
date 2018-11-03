@@ -2,13 +2,13 @@ class CategorySelect extends HTMLElement {
 	constructor() {
 		// Always call super first in constructor
 		super();
-		
+
 		let pickerOpen = false;
 		let selected = this.getAttribute("selected");
-		
+
 		// Create a shadow root
 		let shadow = this.attachShadow({mode: "open"});
-		
+
 		// Create elements
 		let wrapper = document.createElement("div");
 		wrapper.className = "wrapper";
@@ -22,7 +22,7 @@ class CategorySelect extends HTMLElement {
 		let picker = document.createElement("div");
 		picker.className = "picker";
 		picker.style.display = "none";
-		
+
 		let items = [
 			{name: "Items of Interest", disabled: true, items: [
 				{name: "Starbucks Cups"},
@@ -43,7 +43,7 @@ class CategorySelect extends HTMLElement {
 								]}
 							]}
 						]}
-					]}					
+					]}
 				]},
 				{name: "Shredded Paper"},
 				{name: "Non-Recyclable Paper"},
@@ -66,39 +66,39 @@ class CategorySelect extends HTMLElement {
 				{name: "Aluminum cans"}
 			]}
 		];
-		
+
 		let post = (item, depth) => {
 			let itemOption = document.createElement("div");
 			itemOption.className = "item";
 			itemOption.innerText = item.name;
 			itemOption.style.paddingLeft = (15 * depth) + "px";
 			picker.appendChild(itemOption);
-			
+
 			if (selected == item) {
 				displayLabel.innerText = item;
 			}
-			
+
 			if (item.disabled) {
 				itemOption.style.color = "#999";
 				itemOption.className = "item disabled";
 			}
-			
+
 			if (item.items) {
 				for (let i = 0; i < item.items.length; i++) {
 					post(item.items[i], depth + 1);
 				}
 			}
 		};
-		
+
 		for (let i = 0; i < items.length; i++) {
 			post(items[i], 1);
 		}
-		
+
 		display.addEventListener("click", (event) => {
 			pickerOpen = !pickerOpen;
 			picker.style.display = pickerOpen ? "block" : "none";
 		});
-		
+
 		let style = document.createElement("style");
 		style.textContent = `
 .wrapper {
@@ -167,7 +167,7 @@ class CategorySelect extends HTMLElement {
 	color: #FFF;
 }
 `;
-		
+
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
@@ -176,13 +176,75 @@ class CategorySelect extends HTMLElement {
 		display.appendChild(arrow);
 		wrapper.appendChild(picker);
 	}
-	
+
 	connectedCallback() {
 		let selected = this.getAttribute("selected");
-		
+
 		if (selected) {
 			this.displayLabel.innerText = selected;
 		}
+	}
+}
+
+class CategoryBag extends HTMLElement {
+	constructor() {
+		// Always call super first in constructor
+		super();
+
+		// Create a shadow root
+		let shadow = this.attachShadow({mode: "open"});
+
+		// Create elements
+		let wrapper = document.createElement("div");
+		wrapper.className = "data-category category-label";
+    wrapper.dataset.label = "Bag #1";
+
+		let del = document.createElement("div");
+		del.className = "delete";
+
+		let delspan = document.createElement("span");
+		delspan.className = "mdi mdi-close";
+
+		let half1 = document.createElement("div");
+		half1.className = "half";
+
+		let half2 = document.createElement("div");
+		half2.className = "half";
+
+		let weight = document.createElement("h3");
+		weight.innerText = "Weight (lbs)";
+
+		let inputWeight = document.createElement("input");
+		inputWeight.type = "number";
+		inputWeight.className = "data-content";
+		inputWeight.setAttribute("placeholder", "Weight");
+
+		let volume = document.createElement("h3");
+		volume.innerText = "Volume (gal)";
+
+		let inputVolume = document.createElement("input");
+		inputVolume.type = "number";
+		inputVolume.className = "data-content";
+		inputVolume.setAttribute("placeholder", "Volume");
+
+		wrapper.appendChild(del);
+		del.appendChild(delspan);
+		wrapper.appendChild(half1);
+		half1.appendChild(weight);
+		half1.appendChild(inputWeight);
+		wrapper.appendChild(half2);
+		half2.appendChild(volume);
+		half2.appendChild(inputVolume);
+
+		let style = document.createElement("style");
+		style.textContent = `
+@import "input.css";
+@import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
+`;
+
+		// Attach the created elements to the shadow dom
+		shadow.appendChild(style);
+		shadow.appendChild(wrapper);
 	}
 }
 
@@ -190,26 +252,66 @@ class CategoryBox extends HTMLElement {
 	constructor() {
 		// Always call super first in constructor
 		super();
-		
-		let pickerOpen = false;
-		let selected = this.getAttribute("selected");
-		
+
 		// Create a shadow root
 		let shadow = this.attachShadow({mode: "open"});
-		
+
 		// Create elements
 		let wrapper = document.createElement("div");
-		wrapper.className = "wrapper";
-		
+		wrapper.className = "data-category";
+
+		let del = document.createElement("div");
+		del.className = "delete";
+
+		let delspan = document.createElement("span");
+		delspan.className = "mdi mdi-close";
+
+		let h3 = document.createElement("h3");
+		h3.innerText = "Category";
+
+		let categorySelect = document.createElement("category-select");
+		categorySelect.setAttribute("selected", "Recyclable Paper");
+
+		let bag = document.createElement("category-bag");
+
+		let div = document.createElement("div");
+
+		let button = document.createElement("button");
+		button.className = "fab icon";
+
+		let buttonspan = document.createElement("span");
+		buttonspan.className = "icon mdi mdi-plus";
+
+		let buttonLabel = document.createTextNode("Bag");
+
+		// wrapper.appendChild(del);
+		// del.appendChild(delspan);
+		// wrapper.appendChild(h3);
+		// wrapper.appendChild(categorySelect);
+		// wrapper.appendChild(bag);
+		// wrapper.appendChild(div);
+		// div.appendChild(button);
+		// button.appendChild(buttonspan);
+		// button.appendChild(buttonLabel);
+
 		let style = document.createElement("style");
 		style.textContent = `
-.wrapper {
+.data-category {
 	position: relative;
-	cursor: default;
-	user-select: none;
+	margin: 24px 0 8px 0;
+	padding: 15px;
+	border-radius: 4px;
+	border: 1px solid #DADCE0;
+	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
+}
+
+.delete {
+	position: absolute;
+	top: 6px;
+	right: 6px;
 }
 `;
-		
+
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
@@ -217,4 +319,45 @@ class CategoryBox extends HTMLElement {
 }
 
 customElements.define("category-select", CategorySelect);
+customElements.define("category-bag", CategoryBag);
 customElements.define("category-box", CategoryBox);
+
+/*
+// Saves a new form on the Firebase DB.
+function saveAuditForm(elementvalue) {
+  // Add a new form entry to the Firebase Database.
+
+}
+
+
+// Triggered when the send new audit form is submitted.
+function onAuditFormSubmit(e) {
+  e.preventDefault();
+  // Check that the new form is submitted.
+
+}
+
+//Creates new category on audit form
+function onAddCategory(e) {
+	e.preventDefault();
+}
+
+//Create new bags in category
+function onAddBags(e) {
+	e.preventDefault();
+}
+
+/
+var CATEGORY_TEMPLATE =
+    '<div class="category-data">' +
+		'<div class="show-whitespace delete" style="font-size: 28px;">' +
+		'</div>' +
+    '</div>';
+
+let auditFormElement = document.getElementById('audit-form');
+let auditInputElement = document.getElementById('audit');
+let auditListofCategories = document.getElementById('category-list');
+
+auditFormElement.addEventListener('submit', onAuditFormSubmit);
+auditFormElement.addEventListener('add-category', onAddCategory);
+*/

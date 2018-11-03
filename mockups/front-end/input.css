@@ -114,3 +114,92 @@ hr {
 	margin: 0 17px 0 11px;
 	font-size: 28px;
 }
+
+
+
+
+
+
+
+
+
+.header {
+	display: flex;
+	height: 62px;
+	padding: 4px 40px;
+	align-items: center;
+	color: rgba(0,0,0,.87);
+	line-height: 32px;
+	font-size: 18px;
+	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
+}
+
+.header .item {
+	padding: 0 16px;
+}
+
+.content {
+	padding: 20px 40px;
+	font-size: 16px;
+}
+
+.half,
+.right {
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+}
+
+.right {
+	text-align: right;
+}
+
+.data-content {
+	font-family: "Roboto Mono", monospace;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.data-category {
+	position: relative;
+	margin: 24px 0 8px 0;
+	padding: 15px;
+	border-radius: 4px;
+	border: 1px solid #DADCE0;
+	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
+}
+
+.data-category.category-label {
+	padding-top: 20px;
+}
+
+.category-label::before {
+	content: attr(data-label);
+	position: absolute;
+	top: -9px;
+/*				margin-left: -8px;*/
+	padding: 0 8px;
+	background: #FFF;
+	font-size: 18px;
+	line-height: 18px;
+}
+
+.delete {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	font-size: 28px;
+}
+
+.hide-whitespace {
+	/* font-size: 0; */
+}
+
+.content .show-whitespace {
+	font-size: 16px;
+}
+
+input.inline {
+	margin: 0;
+	padding: 0;
+}

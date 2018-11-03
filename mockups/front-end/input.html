@@ -19,33 +19,33 @@
 				font-size: 18px;
 				box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
 			}
-			
+
 			.header .item {
 				padding: 0 16px;
 			}
-			
+
 			.content {
 				padding: 20px 40px;
 				font-size: 16px;
 			}
-			
+
 			.half,
 			.right {
 				display: inline-block;
 				width: 50%;
 				vertical-align: top;
 			}
-			
+
 			.right {
 				text-align: right;
 			}
-			
+
 			.data-content {
 				font-family: "Roboto Mono", monospace;
 				font-size: 16px;
 				line-height: 24px;
 			}
-			
+
 			.data-category {
 				position: relative;
 				margin: 24px 0 8px 0;
@@ -54,11 +54,11 @@
 				border: 1px solid #DADCE0;
 				box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
 			}
-			
+
 			.data-category.category-label {
 				padding-top: 20px;
 			}
-			
+
 			.category-label::before {
 				content: attr(data-label);
 				position: absolute;
@@ -69,22 +69,22 @@
 				font-size: 18px;
 				line-height: 18px;
 			}
-			
+
 			.delete {
 				position: absolute;
 				top: 6px;
 				right: 6px;
 /*				background: #F44336;*/
 			}
-			
+
 			.hide-whitespace {
-				font-size: 0;
+				/* font-size: 0; */
 			}
-			
+
 			.content .show-whitespace {
 				font-size: 16px;
 			}
-			
+
 			input.inline {
 				margin: 0;
 				padding: 0;
@@ -116,6 +116,7 @@
 				<h2>Notes</h2>
 				<textarea class="data-content" style="max-width: 100%; min-width: 100%; width: 100%; min-height: 72px;" placeholder="Notes"></textarea>
 			</div>
+			<category-box></category-box>
 			<div class="hide-whitespace">
 				<div class="data-category">
 					<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
@@ -143,6 +144,7 @@
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
 						</div>
 					</div>
+					<category-bag></category-bag>
 					<div style="position: relative; text-align: right;">
 						<button class="fab icon"><span class="icon mdi mdi-plus"></span>Bag</button>
 					</div>
