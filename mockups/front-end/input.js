@@ -186,4 +186,35 @@ class CategorySelect extends HTMLElement {
 	}
 }
 
+class CategoryBox extends HTMLElement {
+	constructor() {
+		// Always call super first in constructor
+		super();
+		
+		let pickerOpen = false;
+		let selected = this.getAttribute("selected");
+		
+		// Create a shadow root
+		let shadow = this.attachShadow({mode: "open"});
+		
+		// Create elements
+		let wrapper = document.createElement("div");
+		wrapper.className = "wrapper";
+		
+		let style = document.createElement("style");
+		style.textContent = `
+.wrapper {
+	position: relative;
+	cursor: default;
+	user-select: none;
+}
+`;
+		
+		// Attach the created elements to the shadow dom
+		shadow.appendChild(style);
+		shadow.appendChild(wrapper);
+	}
+}
+
 customElements.define("category-select", CategorySelect);
+customElements.define("category-box", CategoryBox);
