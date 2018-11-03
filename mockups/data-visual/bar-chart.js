@@ -1,5 +1,5 @@
 
-Highcharts.chart('container', {
+Highcharts.chart('container2', {
   title: {
     text: 'Waste Audits of 2018'
   },
@@ -23,6 +23,11 @@ Highcharts.chart('container', {
       }
     }]
   },
+
+  tooltip: {
+    pointFormat: '<b>{point.y} Lbs</b>'
+  },
+
   series: [{
     type: 'column',
     name: 'POST',

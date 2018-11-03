@@ -7,6 +7,7 @@ Highcharts.chart('container', {
   tooltip: {
     pointFormat: '<b>{point.y} Lbs</b>'
   },
+
   plotOptions: {
     pie: {
       allowPointSelect: true,
