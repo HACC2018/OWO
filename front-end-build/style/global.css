@@ -98,6 +98,10 @@ hr {
 	border: none;
 }
 
+.header a {
+  color: white;
+}
+
 .header {
 	display: flex;
 	height: var(--header-height);
