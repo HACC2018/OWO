@@ -1,20 +1,42 @@
-div.container {
-    padding-top: 60px;
-    text-align: center;
+body {
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-div.col {
-    background-color: gray;
-    border-radius: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-
+h1, h2, h3 {
+  text-align: center;
+  margin: 0px;
 }
 
-div.card-footer {
-    color: white;
+p {
+  margin-top: 5px;
 }
-div.h5{
-    padding-top: 5px;
+
+.button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: white;
+  padding: 10px 60px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0px;
 }
+
+.button:hover {
+  background-color: var(--secondary-color-darker);
+}
+
+.container {
+  border: 1px solid #CCC;
+  /*background-color: green;*/
+  color: black;
+  padding: 30px 40px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0;
+}
+
 

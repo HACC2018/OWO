@@ -1,42 +1,40 @@
 body {
-  margin-left: 100px;
-  margin-right: 100px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 
 h1, h2, h3 {
-  text-align: center;
-  margin: 0px;
+	text-align: center;
+	margin: 0px;
 }
 
 p {
-  margin-top: 5px;
+	margin-top: 5px;
 }
 
 .button {
-  background-color: #2196F3;
-  border: none;
-  color: white;
-  padding: 10px 60px;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 0px;
+	background-color: #2196F3;
+	border: none;
+	color: white;
+	padding: 10px 60px;
+	border-radius: 3px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-top: 0px;
 }
 
 .button:hover {
-  background-color: deepskyblue;
+	background-color: deepskyblue;
 }
 
 .container {
-  border: 1px solid #CCC;
-  /*background-color: green;*/
-  color: black;
-  padding: 30px 40px;
-  border-radius: 5px;
-  text-align: center;
-  margin: 0;
+	border: 1px solid #CCC;
+	/*background-color: green;*/
+	color: black;
+	padding: 30px 40px;
+	border-radius: 5px;
+	text-align: center;
+	margin: 0;
 }
-
-
