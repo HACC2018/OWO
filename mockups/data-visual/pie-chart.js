@@ -1,6 +1,6 @@
 db.settings({ timestampsInSnapshots: true });
 
-let pieData = db.collection("collections").doc("iIYmD9AuMqbVZhNAXgsQ");
+let pieData = db.collection("collections").doc("UHM Architecture 10-20-2017");
 
 pieData.get().then(function(trashData) {
     console.log("trashData:", trashData.data());
