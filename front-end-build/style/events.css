@@ -19,14 +19,12 @@ p {
 }
 
 .container {
-	margin-top: 40px;
-	border: 1px solid #CCC;
-	border: 1px solid #dadce0;
+	margin-top: 20px;
+	border: 1px solid #DADCE0;
 	/*background-color: green;*/
 	color: black;
 	padding: 30px 40px;
-	border-radius: 5px;
 	border-radius: 8px;
 	text-align: center;
-	margin: 0;
+  box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
 }
