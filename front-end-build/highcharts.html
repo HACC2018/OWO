@@ -1,62 +1,60 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Data Visualized</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Data Visualized - OWO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="style/global.css">
-		<link rel="stylesheet" type="text/css" href="style/highcharts.css">
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-		<script>
-			// Initialize Firebase
-			let config = {
-				apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
-				authDomain: "oooooo-1cb0d.firebaseapp.com",
-				databaseURL: "https://oooooo-1cb0d.firebaseio.com",
-				projectId: "oooooo-1cb0d",
-				storageBucket: "oooooo-1cb0d.appspot.com",
-				messagingSenderId: "928900583874"
-			};
-			firebase.initializeApp(config);
+  <link rel="stylesheet" href="style/global.css">
+  <link rel="stylesheet" type="text/css" href="style/highcharts.css">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+  <script>
 
-			let db = firebase.firestore();
-			db.settings({ timestampsInSnapshots: true });
-		</script>
-		<script src="script/pie-chart.js" defer></script>
-		<script src="script/bar-chart.js" defer></script>
-	</head>
-	<body>
-		<div class="header">
-			<div class="item brand"><img src="image/logo_white.png"></div>
-			<div class="item">Home</div>
-			<div class="item">Events</div>
-			<div class="item">About</div>
-		</div>
-		<div class="content">
-			<div id="container" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
-			<div id="container2" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
-		</div>
+    // Initialize Firebase
+    let config = {
+      apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+      authDomain: "oooooo-1cb0d.firebaseapp.com",
+      databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+      projectId: "oooooo-1cb0d",
+      storageBucket: "oooooo-1cb0d.appspot.com",
+      messagingSenderId: "928900583874"
+    };
+    firebase.initializeApp(config);
 
-		<div class="header">
-			<div class="item">Oʻahu Waste Organization</div>
-			<div class="item">Home</div>
-			<div class="item">News</div>
-			<div class="item">Events</div>
-			<div class="item">Learn More</div>
-		</div>
-		<div class="content">
-			<div id="graph container"></div>
-			<div id="graph container2"></div>
-			<div id="graph container3"></div>
-		</div>
+    let db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+  </script>
+  <script src="script/pie-chart.js" defer></script>
+  <script src="script/bar-chart.js" defer></script>
+</head>
 
-		<div class="footer">
-			Oʻahu Waste Organization
-			<hr>
-			A team project for HACC 2018
-		</div>
-	</body>
+<body>
+<div class="header">
+  <div class="item brand"><img src="image/logo_white.png"></div>
+  <a href="index.html" class="item">Home</a>
+  <a href="events.html" class="item">Events</a>
+  <a href="highcharts.html" class="item">Charts and Graphs</a>
+  <a href="heatmap.html" class="item">Heat Map</a>
+  <a href="about.html" class="item">About</a>
+</div>
+
+<div class="content">
+  <div id="container" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
+  <div id="container2" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
+</div>
+
+<div class="content">
+  <div id="graph container"></div>
+  <div id="graph container2"></div>
+  <div id="graph container3"></div>
+</div>
+
+<div class="footer">
+  Oʻahu Waste Organization
+  <hr>
+  A team project for HACC 2018
+</div>
+</body>
 </html>
