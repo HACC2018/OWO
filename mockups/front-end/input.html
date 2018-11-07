@@ -2,23 +2,48 @@
 <html>
 	<head>
 		<title>Audit Data - OWO</title>
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta charset="utf-8">
 		
-<!--		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
 <!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
 		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
 		<link href="global.css" rel="stylesheet">
 		<link href="input.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-firestore.js"></script>
 		<script src="input.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// Initialize Firebase
+				let config = {
+					apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+					authDomain: "oooooo-1cb0d.firebaseapp.com",
+					databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+					projectId: "oooooo-1cb0d",
+					storageBucket: "oooooo-1cb0d.appspot.com",
+					messagingSenderId: "928900583874"
+				};
+				firebase.initializeApp(config);
+
+				let db = firebase.firestore();
+				db.settings({timestampsInSnapshots: true});
+				
+				let categoryDocRef = db.collection("global").doc("categories");
+				
+				categoryDocRef.get().then((categoryDoc) => {
+					if (categoryDoc.exists) {
+						let categoryData = categoryDoc.data().category;
+						
+					}
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="header">
-			<div class="item">Oʻahu Waste Organization</div>
+			<div class="item brand">Oʻahu Waste Organization</div>
 			<div class="item">Events</div>
 			<div class="item">About</div>
 			<div class="item">Contact Us</div>
@@ -32,11 +57,11 @@
 					<h2>Building</h2>
 					<div class="data-content">Queen Liliʻuokalani Center for Student Services</div>
 				</div>
-				<div class="right">
+				<div class="right half">
 					<h2>Date</h2>
 					<div class="data-content">Thursday, October 25, 2018</div>
 					<h2>Bucket Tare</h2>
-					<input class="data-content" style="text-align: right;" placeholder="Bucket Tare">
+					<input class="data-content right" placeholder="Bucket Tare">
 				</div>
 				<h2>Notes</h2>
 				<textarea class="data-content" style="max-width: 100%; min-width: 100%; width: 100%; min-height: 72px;" placeholder="Notes"></textarea>
@@ -44,22 +69,20 @@
 			<category-box></category-box>
 			<div class="hide-whitespace">
 				<div class="data-category">
-					<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
+					<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
 					<h3>Category</h3>
-					<category-select selected="Recyclable Paper"></category-select>
+					<custom-select selected="Select a category...">
+						<select-option>1</select-option>
+						<select-option-group text="Group">
+							<select-option>2</select-option>
+							<select-option>3</select-option>
+						</select-option-group>
+						<select-option>4</select-option>
+						<select-option>5</select-option>
+						<select-option>6</select-option>
+					</custom-select>
 					<div class="data-category category-label" data-label="Bag #1">
-						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
-						<div class="half">
-							<h3>Weight (lbs)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
-						</div>
-						<div class="half">
-							<h3>Volume (gal)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
-						</div>
-					</div>
-					<div class="data-category category-label" data-label="Bag #2">
-						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
+						<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
 						<div class="half">
 							<h3>Weight (lbs)</h3>
 							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
@@ -70,37 +93,20 @@
 						</div>
 					</div>
 					<category-bag></category-bag>
-					<div style="position: relative; text-align: right;">
-						<button class="fab icon"><span class="icon mdi mdi-plus"></span>Bag</button>
+					<div class="right">
+						<button class="fab icon"><div class="button-content"><span class="icon mdi mdi-plus"></span>Bag</div></button>
 					</div>
 				</div>
-				<div class="data-category">
-					<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
-					<h3>Category</h3>
-					<category-select selected="Recyclable Paper"></category-select>
-					<div class="data-category category-label" data-label="Bag #1">
-						<div class="show-whitespace delete" style="font-size: 28px;"><span class="mdi mdi-close"></span></div>
-						<div class="half">
-							<h3>Weight (lbs)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
-						</div>
-						<div class="half">
-							<h3>Volume (gal)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
-						</div>
-					</div>
-					<div style="text-align: right;">
-						<button class="fab icon"><div style="display: flex; align-items: center; justify-content: center;"><span class="icon mdi mdi-plus"></span>Bag</div></button>
-					</div>
-				</div>
-				<div style="text-align: right; position: sticky; bottom: 20px; right: 20px;">
-					<button class="fab icon">
+			</div>
+			<div style="text-align: right; position: sticky; bottom: 20px; right: 20px;">
+				<button class="fab icon">
+					<div class="button-content">
 						<div class="icon mdi mdi-plus" style="margin-right: 5px; font-size: 28px;"></div>
 						<span style="font-size: 24px;">/</span>
 						<div class="icon mdi mdi-magnify" style="margin-left: 7px; font-size: 24px"></div>
 						Category
-					</button>
-				</div>
+					</div>
+				</button>
 			</div>
 		</div>
 		<div class="footer">

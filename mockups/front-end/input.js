@@ -1,8 +1,148 @@
-class CategorySelect extends HTMLElement {
+class SelectOptionGroup extends HTMLElement {
+    constructor() {
+        // Always call super first in constructor
+        super();
+
+		this.text = "";
+		
+		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
+		let observationConfig = {attributeFilter: ["text"], attributes: true, childList: true};
+		observer.observe(this, observationConfig);
+		
+		this.updateParent();
+    }
+	
+	connectedCallback() {
+		this.updateParent();
+	}
+	
+	updateParent() {
+		if (this.getAttribute("text") !== null) {
+			this.text = this.getAttribute("text");
+		} else {
+			this.text = "";
+		}
+		
+		if (this.parentElement !== null) {
+			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+				if (this.parentElement.tagName == "CUSTOM-SELECT") {
+					this.parentElement.buildList();
+				}
+			}
+		}
+	}
+	
+	selectOption(option) {
+		if (this.parentElement !== null) {
+			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+				if (this.parentElement.tagName == "CUSTOM-SELECT" || this.parentElement.tagName == "SELECT-OPTION-GROUP") {
+					this.parentElement.selectOption(this);
+				}
+			}
+		}
+	}
+	
+	observed(records, observer) {
+		for (let i = 0; i < records.length; i++) {
+			let record = records[i];
+			
+//			if (record.type == "childList") {
+				this.updateParent();
+//			}
+		}
+	}
+}
+
+class SelectOption extends HTMLElement {
+    constructor() {
+        // Always call super first in constructor
+        super();
+
+		this._selected = false;
+		this._disabled = false;
+		
+		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
+		let observationConfig = {attributeFilter: ["selected", "disabled"], attributes: true, characterData: true, childList: true, subtree: true};
+		observer.observe(this, observationConfig);
+		
+		this.update();
+		this.updateParent();
+    }
+	
+	connectedCallback() {
+		this.update();
+		this.updateParent();
+	}
+	
+	set selected(value) {
+		this._selected = value;
+		
+		if (this.parentElement !== null) {
+			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+				if (this.parentElement.tagName == "CUSTOM-SELECT" || this.parentElement.tagName == "SELECT-OPTION-GROUP") {
+					this.parentElement.selectOption(this);
+				}
+			}
+		}
+	}
+	
+	get selected() {
+		return this._selected;
+	}
+		
+	set disabled(value) {
+		this._disabled = value;
+	}
+	
+	get disabled() {
+		return this._disabled;
+	}
+	
+	update() {
+		this._selected = this.getAttribute("selected") !== null;
+		this._disabled = this.getAttribute("disabled") !== null;
+	}
+	
+	updateParent() {
+		if (this.parentElement !== null) {
+			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+				if (this.parentElement.tagName == "CUSTOM-SELECT") {
+					this.parentElement.buildList();
+				} else if (this.parentElement.tagName == "SELECT-OPTION-GROUP") {
+					this.parentElement.updateParent();
+				}
+			}
+		}
+	}
+	
+	observed(records, observer) {
+		for (let i = 0; i < records.length; i++) {
+			let record = records[i];
+			
+			if (record.type == "attributes") {
+				if (record.attributeName == "selected") {
+					if (this.getAttribute("selected") !== null) {
+						if (this.parentElement !== null) {
+							if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+								if (this.parentElement.tagName == "CUSTOM-SELECT" || this.parentElement.tagName == "SELECT-OPTION-GROUP") {
+									this.parentElement.selectOption(this);
+								}
+							}
+						}
+					}
+				} else {
+					this.updateParent();
+				}
+			}
+		}
+	}
+}
+
+class CustomSelect extends HTMLElement {
 	constructor() {
 		// Always call super first in constructor
 		super();
-
+		let self = this;
 		let pickerOpen = false;
 		let selected = this.getAttribute("selected");
 
@@ -15,13 +155,14 @@ class CategorySelect extends HTMLElement {
 		let display = document.createElement("div");
 		display.className = "display";
 		let displayLabel = document.createElement("div");
-		displayLabel.innerText = "Choose a category...";
+		displayLabel.innerText = "Select a category...";
 		this.displayLabel = displayLabel;
 		let arrow = document.createElement("div");
 		arrow.className = "arrow";
 		let picker = document.createElement("div");
 		picker.className = "picker";
 		picker.style.display = "none";
+		this.picker = picker;
 
 		let items = [
 			{name: "Items of Interest", disabled: true, items: [
@@ -34,15 +175,7 @@ class CategorySelect extends HTMLElement {
 			{name: "Paper", disabled: true, items: [
 				{name: "Recyclable Paper", items: [
 					{name: "Subcategory 2", items: [
-						{name: "Subcategory 3", items: [
-							{name: "Subcategory 4", items: [
-								{name: "Subcategory 5", items: [
-									{name: "Subcategory 6", items: [
-										{name: "Subcategory 7"}
-									]}
-								]}
-							]}
-						]}
+						{name: "Subcategory 3"}
 					]}
 				]},
 				{name: "Shredded Paper"},
@@ -66,33 +199,8 @@ class CategorySelect extends HTMLElement {
 				{name: "Aluminum cans"}
 			]}
 		];
-
-		let post = (item, depth) => {
-			let itemOption = document.createElement("div");
-			itemOption.className = "item";
-			itemOption.innerText = item.name;
-			itemOption.style.paddingLeft = (15 * depth) + "px";
-			picker.appendChild(itemOption);
-
-			if (selected == item) {
-				displayLabel.innerText = item;
-			}
-
-			if (item.disabled) {
-				itemOption.style.color = "#999";
-				itemOption.className = "item disabled";
-			}
-
-			if (item.items) {
-				for (let i = 0; i < item.items.length; i++) {
-					post(item.items[i], depth + 1);
-				}
-			}
-		};
-
-		for (let i = 0; i < items.length; i++) {
-			post(items[i], 1);
-		}
+		
+		this.buildList();
 
 		display.addEventListener("click", (event) => {
 			pickerOpen = !pickerOpen;
@@ -175,13 +283,86 @@ class CategorySelect extends HTMLElement {
 		display.appendChild(displayLabel);
 		display.appendChild(arrow);
 		wrapper.appendChild(picker);
+
+		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
+		let observationConfig = {childList: true};
+		observer.observe(this, observationConfig);
 	}
 
 	connectedCallback() {
-		let selected = this.getAttribute("selected");
+		this.buildList();
+	}
+	
+	buildList() {
+		while (this.picker.firstChild) {
+			this.picker.removeChild(this.picker.firstChild);
+		}
+		
+		let post = (item, depth) => {
+			let isGroup = item.tagName == "SELECT-OPTION-GROUP";
+			
+			let itemOption = document.createElement("div");
+			itemOption.className = "item";
+			itemOption.innerText = isGroup ? item.text : item.innerText;
+			itemOption.style.paddingLeft = (15 * depth) + "px";
+			itemOption.selectOption = item;
+			
+			itemOption.addEventListener("click", () => {
+				this.selectOption(itemOption.selectOption);
+				this.picker.style.display = "none";
+			});
+			
+			this.picker.appendChild(itemOption);
 
-		if (selected) {
-			this.displayLabel.innerText = selected;
+			if (item.selected) {
+				this.displayLabel.innerText = item.innerText;
+			}
+
+			if (isGroup || item.disabled) {
+				itemOption.style.color = "#999";
+				itemOption.className = "item disabled";
+			}
+			
+			if (isGroup) {
+				for (let i = 0; i < item.children.length; i++) {
+					post(item.children[i], depth + 1);
+				}
+			}
+		};
+
+		for (let i = 0; i < this.children.length; i++) {
+			post(this.children[i], 1);
+		}
+	}
+	
+	selectOption(option) {
+		let deselect = (item) => {
+			let isGroup = item.tagName == "SELECT-OPTION-GROUP";
+			
+			if (isGroup) {
+				for (let i = 0; i < item.children.length; i++) {
+					deselect(item.children[i], 1);
+				}
+			} else {
+				item._selected = false;
+			}
+		};
+		
+		for (let i = 0; i < this.children.length; i++) {
+			deselect(this.children[i]);
+		}
+		
+		option._selected = true;
+		this.displayLabel.innerText = option.innerText;
+	}
+	
+	observed(records, observer) {
+		for (let i = 0; i < records.length; i++) {
+			let record = records[i];
+			
+			if (record.type == "childList") {
+				this.buildList();
+			}
 		}
 	}
 }
@@ -197,7 +378,8 @@ class CategoryBag extends HTMLElement {
 		// Create elements
 		let wrapper = document.createElement("div");
 		wrapper.className = "data-category category-label";
-    wrapper.dataset.label = "Bag #1";
+		wrapper.dataset.label = "Bag #1";
+		this.wrapper = wrapper;
 
 		let del = document.createElement("div");
 		del.className = "delete";
@@ -207,9 +389,7 @@ class CategoryBag extends HTMLElement {
 
 		let half1 = document.createElement("div");
 		half1.className = "half";
-
-		let half2 = document.createElement("div");
-		half2.className = "half";
+		half1.style.paddingRight = "5px";
 
 		let weight = document.createElement("h3");
 		weight.innerText = "Weight (lbs)";
@@ -218,6 +398,11 @@ class CategoryBag extends HTMLElement {
 		inputWeight.type = "number";
 		inputWeight.className = "data-content";
 		inputWeight.setAttribute("placeholder", "Weight");
+		inputWeight.style.width = "100%";
+
+		let half2 = document.createElement("div");
+		half2.className = "half";
+		half2.style.paddingLeft = "5px";
 
 		let volume = document.createElement("h3");
 		volume.innerText = "Volume (gal)";
@@ -226,6 +411,7 @@ class CategoryBag extends HTMLElement {
 		inputVolume.type = "number";
 		inputVolume.className = "data-content";
 		inputVolume.setAttribute("placeholder", "Volume");
+		inputVolume.style.width = "100%";
 
 		wrapper.appendChild(del);
 		del.appendChild(delspan);
@@ -238,6 +424,7 @@ class CategoryBag extends HTMLElement {
 
 		let style = document.createElement("style");
 		style.textContent = `
+@import "global.css";
 @import "input.css";
 @import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
@@ -245,6 +432,28 @@ class CategoryBag extends HTMLElement {
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
+		
+		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
+		let observationConfig = {attributeFilter: ["number"], attributes: true};
+		observer.observe(this, observationConfig);
+	}
+	
+	connectedCallback() {
+		if (this.getAttribute("number") !== null) {
+			this.wrapper.dataset.label = `Bag #${this.getAttribute("number")}`;
+		}
+	}
+	
+	observed(records, observer) {
+		for (let i = 0; i < records.length; i++) {
+			let record = records[i];
+			
+			if (record.type == "attributes") {
+				if (this.getAttribute("number") !== null) {
+					this.wrapper.dataset.label = `Bag #${this.getAttribute("number")}`;
+				}
+			}
+		}
 	}
 }
 
@@ -269,59 +478,85 @@ class CategoryBox extends HTMLElement {
 		let h3 = document.createElement("h3");
 		h3.innerText = "Category";
 
-		let categorySelect = document.createElement("category-select");
-		categorySelect.setAttribute("selected", "Recyclable Paper");
-
+		let customSelect = document.createElement("custom-select");
+//		customSelect.setAttribute("selected", "Recyclable Paper");
+		
+		let bagContainer = document.createElement("div");
+		this.bagContainer = bagContainer;
+		
 		let bag = document.createElement("category-bag");
+		bag.setAttribute("number", 1);
 
 		let div = document.createElement("div");
+		div.className = "right";
 
 		let button = document.createElement("button");
 		button.className = "fab icon";
+		
+		let buttonContent = document.createElement("div");
+		buttonContent.className = "button-content";
 
 		let buttonspan = document.createElement("span");
 		buttonspan.className = "icon mdi mdi-plus";
 
 		let buttonLabel = document.createTextNode("Bag");
 
-		// wrapper.appendChild(del);
-		// del.appendChild(delspan);
-		// wrapper.appendChild(h3);
-		// wrapper.appendChild(categorySelect);
-		// wrapper.appendChild(bag);
-		// wrapper.appendChild(div);
-		// div.appendChild(button);
-		// button.appendChild(buttonspan);
-		// button.appendChild(buttonLabel);
+		wrapper.appendChild(del);
+		del.appendChild(delspan);
+		wrapper.appendChild(h3);
+		wrapper.appendChild(customSelect);
+		wrapper.appendChild(bagContainer);
+		bagContainer.appendChild(bag);
+		wrapper.appendChild(div);
+		div.appendChild(button);
+		button.appendChild(buttonContent);
+		buttonContent.appendChild(buttonspan);
+		buttonContent.appendChild(buttonLabel);
 
 		let style = document.createElement("style");
 		style.textContent = `
-.data-category {
-	position: relative;
-	margin: 24px 0 8px 0;
-	padding: 15px;
-	border-radius: 4px;
-	border: 1px solid #DADCE0;
-	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
-}
-
-.delete {
-	position: absolute;
-	top: 6px;
-	right: 6px;
-}
+@import "global.css";
+@import "input.css";
+@import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
+		
+		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
+		let observationConfig = {childList: true};
+		observer.observe(bagContainer, observationConfig);
+	}
+	
+	numberBags() {
+		console.log(this.bagContainer.children);
+		for (let i = 0; i < this.bagContainer.children.length; i++) {
+			let bag = this.bagContainer.children[i];
+			
+			bag.setAttribute("number", i + 1);
+		}
+	}
+	
+	observed(records, observer) {
+		for (let i = 0; i < records.length; i++) {
+			let record = records[i];
+			console.log(record);
+			
+			if (record.type == "childList") {
+				this.numberBags();
+			}
+		}
 	}
 }
 
-customElements.define("category-select", CategorySelect);
+customElements.define("select-option-group", SelectOptionGroup);
+customElements.define("select-option", SelectOption);
+customElements.define("custom-select", CustomSelect);
 customElements.define("category-bag", CategoryBag);
 customElements.define("category-box", CategoryBox);
 
+/*
 //Initialize databsase
 let config = {
 	apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
@@ -337,7 +572,7 @@ let db = firebase.firestore();
 db.settings({timestampsInSnapshots: true});
 
 //Skeleton for adding into database
-submitForm(e) {
+function submitForm(e) {
 	e.preventDefault();
 	//Grabs all category container DOM elements
 	let cat_containers = auditFormElement.getElementByClassName("data-category");
@@ -384,4 +619,5 @@ submitForm(e) {
 //Reference to database
 let dbAuditForms = db.collection.('collection');
 let auditFormElement = document.getElementById("audit-form");
-auditFormElement.addEventListener('submit', onAuditFormSubmit)
+auditFormElement.addEventListener('submit', onAuditFormSubmit);
+*/

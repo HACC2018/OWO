@@ -1,28 +1,8 @@
-.header {
-	display: flex;
-	height: 62px;
-	padding: 4px 40px;
-	align-items: center;
-	color: rgba(0,0,0,.87);
-	line-height: 32px;
-	font-size: 18px;
-	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
-}
-
-.header .item {
-	padding: 0 16px;
-}
-
-.content {
-	padding: 20px 40px;
-	font-size: 16px;
-}
-
-.half,
-.right {
+.half {
 	display: inline-block;
 	width: 50%;
 	vertical-align: top;
+	box-sizing: border-box;
 }
 
 .right {
@@ -61,17 +41,20 @@
 
 .delete {
 	position: absolute;
-	top: 0;
+	top: 3px;
 	right: 6px;
+	padding: 4px;
 	font-size: 28px;
+	line-height: 28px;
+	transition: background var(--hover-transition-time);
+}
+
+.delete:hover {
+	background: rgba(0, 0, 0, 0.15);
 }
 
 .hide-whitespace {
 	font-size: 0;
-}
-
-.content .show-whitespace {
-	font-size: 16px;
 }
 
 input.inline {
