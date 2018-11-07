@@ -4,9 +4,24 @@
   text-align: center;
 }
 
+.title {
+  font-weight: bolder;
+  font-size: 30px;
+}
+
 li {
   float: none;
   display: inline-block;
+}
+
+#contactColumn {
+   float: left;
+   width: 10%;
+ }
+
+#impactColumn {
+  float: right;
+  width: 30%;
 }
 
 .grad-background {
@@ -20,3 +35,4 @@ li {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
