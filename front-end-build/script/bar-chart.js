@@ -1,7 +1,7 @@
 
 Highcharts.chart('container2', {
   title: {
-    text: 'Waste Audits of 2018'
+    text: 'Waste Audits of 2017'
   },
   xAxis: {
     categories: ['Items of Interest', 'Paper', 'Plastic', 'Glass', 'Metals', 'Organics', 'Misc']
@@ -15,7 +15,7 @@ Highcharts.chart('container2', {
 
   labels: {
     items: [{
-      html: 'Total waste of UH Manoa buildings',
+      html: 'Waste by Category of UH Manoa Buildings',
       style: {
         left: '50px',
         top: '0px',
@@ -30,56 +30,32 @@ Highcharts.chart('container2', {
 
   series: [{
     type: 'column',
-    name: 'POST',
-    data: [3, 2, 1, 3, 4]
+    name: 'Architecture',
+    data: [17.4, 35.1, 21.25, 9.15, 11, 35.15, 0]
   }, {
     type: 'column',
-    name: 'Sakamaki',
-    data: [2, 3, 5, 3, 6]
+    name: 'BusAd',
+    data: [28.45, 34.55, 24.35, 1.85, 1.15, 25.5, 9.16]
   }, {
     type: 'column',
-    name: 'Holmes',
-    data: [4, 3, 3, 4, 0]
+    name: 'QLC Dumpster',
+    data: [31.4, 335.1, 59.65, 1.1, 2.85, 42.9, 19.4]
   },  {
     type: 'column',
-    name: 'Campus Center',
-    data: [4, 3, 3, 5, 0]
+    name: 'QLC Recycling',
+    data: [0, 49.5, 0, 0, 0, 0, 0]
   },
     {
       type: 'spline',
       name: 'Average',
-      data: [3, 2.67, 3, 6.33, 3.33],
+      data: [19.13, 113.56, 26.31, 3.03, 3.75, 25.89, 7.14],
       marker: {
         lineWidth: 2,
         lineColor: Highcharts.getOptions().colors[3],
         fillColor: 'white'
       }
-    }, {
-      type: 'pie',
-      name: 'Total consumption',
-      data: [{
-        name: 'POST',
-        y: 13,
-        color: Highcharts.getOptions().colors[0]
-      }, {
-        name: 'Sakamaki',
-        y: 23,
-        color: Highcharts.getOptions().colors[1]
-      }, {
-        name: 'Holmes',
-        y: 19,
-        color: Highcharts.getOptions().colors[2]
-      }, {
-        name: 'Campus Center',
-        y: 29,
-        color: Highcharts.getOptions().colors[3]
-      }],
-      center: [100, 50],
-      size: 100,
-      showInLegend: false,
-      dataLabels: {
-        enabled: false
-      }
     }]
 });
+
+
 
