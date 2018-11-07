@@ -4,7 +4,6 @@
 		<title>Audit Data - OWO</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta charset="utf-8">
 		
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
 <!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
@@ -34,8 +33,8 @@
 				
 				categoryDocRef.get().then((categoryDoc) => {
 					if (categoryDoc.exists) {
-						let categoryData = categoryDoc.data().category;
-						
+						window.categoryData = categoryDoc.data().categories;
+						window.dispatchEvent(new Event("categories-loaded"));
 					}
 				});
 			});
@@ -46,7 +45,8 @@
 			<div class="item brand">Oʻahu Waste Organization</div>
 			<div class="item">Events</div>
 			<div class="item">About</div>
-			<div class="item">Contact Us</div>
+			<div class="item">Learn More</div>
+			<div class="item" style="right: 0">Login</div>
 			<!-- Organizing our Waste on Oʻahu -->
 		</div>
 		<div class="content">
@@ -71,16 +71,7 @@
 				<div class="data-category">
 					<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
 					<h3>Category</h3>
-					<custom-select selected="Select a category...">
-						<select-option>1</select-option>
-						<select-option-group text="Group">
-							<select-option>2</select-option>
-							<select-option>3</select-option>
-						</select-option-group>
-						<select-option>4</select-option>
-						<select-option>5</select-option>
-						<select-option>6</select-option>
-					</custom-select>
+					<custom-select selected="Select a category..."></custom-select>
 					<div class="data-category category-label" data-label="Bag #1">
 						<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
 						<div class="half">

@@ -117,6 +117,7 @@ hr {
 
 .header .item:not(.brand):hover {
 	background: var(--primary-color-darker);
+	cursor: pointer;
 }
 
 .content {
@@ -130,6 +131,7 @@ hr {
 	background: var(--accent-color);
 	color: var(--accent-color-text);
 	text-align: center;
+	box-sizing: border-box;
 }
 
 .footer hr {
