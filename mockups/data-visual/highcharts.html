@@ -1,14 +1,30 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <title>Data Visualized</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      let config = {
+        apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+        authDomain: "oooooo-1cb0d.firebaseapp.com",
+        databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+        projectId: "oooooo-1cb0d",
+        storageBucket: "oooooo-1cb0d.appspot.com",
+        messagingSenderId: "928900583874"
+      };
+      firebase.initializeApp(config);
+
+      let db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+  </script>
   <script src="pie-chart.js" defer></script>
   <script src="bar-chart.js" defer></script>
-  <title>Data Visualized</title>
 </head>
 <body>
 

@@ -1,41 +1,54 @@
-Highcharts.chart('container', {
+db.settings({ timestampsInSnapshots: true });
 
-  title: {
-    text: 'Trash Audit of Building XX'
-  },
+let pieData = db.collection("collections").doc("iIYmD9AuMqbVZhNAXgsQ");
 
-  tooltip: {
-    pointFormat: '<b>{point.y} Lbs</b>'
-  },
-
-  plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: 'pointer',
-      dataLabels: {
-        enabled: true,
-        format: '<b>{point.name}</b>: {point.y} Lbs',
-        style: {
-          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+pieData.get().then(function(trashData) {
+    console.log("trashData:", trashData.data());
+    let output = [];
+    for(i = 0; i < trashData.data().categories.length; i++) {
+      let category = trashData.data().categories[i].name;
+      let totalWeight = 0;
+      for(j = 0; j < trashData.data().categories[i].items.length; j++) {
+        for(k = 0; k < trashData.data().categories[i].items[j].bags.length; k++) {
+          totalWeight += trashData.data().categories[i].items[j].bags[k].weight;
         }
       }
+      let temp = [category, totalWeight];
+      output.push(temp);
     }
-  },
 
-  series: [{
-    type: 'pie',
-    allowPointSelect: true,
-    keys: ['name', 'y', 'selected', 'sliced'],
-    data: [
-      ['Items of Interest', 17.4, false],
-      ['Paper', 35.1, false],
-      ['Plastic', 21.25, false],
-      ['Glass', 9.15, false],
-      ['Metals', 3.1, false],
-      ['Organics', 35.15, false],
-      ['Misc', 0, false, false],
-    ],
-    showInLegend: true
-  }]
+
+    Highcharts.chart('container', {
+
+      title: {
+        text: 'Trash Audit of Building XX'
+      },
+
+      tooltip: {
+        pointFormat: '<b>{point.y} Lbs</b>'
+      },
+
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.y} Lbs',
+            style: {
+              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            }
+          }
+        }
+      },
+
+      series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: output,
+        showInLegend: true
+      }]
+    });
 });
 
