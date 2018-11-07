@@ -18,6 +18,7 @@ textarea,
 button,
 select {
 	font-family: "Google Sans", "Roboto", Helvetica, "Times New Roman", sans-serif;
+	font-family: "Roboto", Helvetica, "Times New Roman", sans-serif;
 	font-size: 16px;
 }
 
@@ -105,18 +106,29 @@ hr {
 }
 
 .header .item {
+	height: 100%;
 	padding: 0 16px;
 	cursor: default;
 	user-select: none;
 	transition: background var(--hover-transition-time);
 }
 
-.header .item:first-child {
+.header .brand {
 	padding-left: 0;
+	font-family: "Google Sans", Helvetica, "Times New Roman", sans-serif;
+}
+
+.header .item.brand img {
+	height: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0;
+	box-sizing: border-box;
 }
 
 .header .item:not(.brand):hover {
 	background: var(--primary-color-darker);
+	cursor: pointer;
 }
 
 .content {
@@ -130,6 +142,7 @@ hr {
 	background: var(--accent-color);
 	color: var(--accent-color-text);
 	text-align: center;
+	box-sizing: border-box;
 }
 
 .footer hr {

@@ -1,0 +1,17 @@
+.content {
+	padding: 0;
+}
+
+.banner {
+	width: 100%;
+	padding: 20vh 60px;
+	padding: 90px 96px;
+	background: linear-gradient(135deg, #0042c0 0%,#021b9b 100%);
+	background: linear-gradient(135deg, var(--secondary-color) 0%,var(--secondary-color-darker)  100%);
+	background: var(--accent-color);
+	color: #FFF;
+	font-size: 3em;
+	font-weight: 500;
+	text-align: center;
+	box-sizing: border-box;
+}
