@@ -4,25 +4,25 @@ class SelectOptionGroup extends HTMLElement {
         super();
 
 		this.text = "";
-		
+
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
 		let observationConfig = {attributeFilter: ["text"], attributes: true, childList: true};
 		observer.observe(this, observationConfig);
-		
+
 		this.updateParent();
     }
-	
+
 	connectedCallback() {
 		this.updateParent();
 	}
-	
+
 	updateParent() {
 		if (this.getAttribute("text") !== null) {
 			this.text = this.getAttribute("text");
 		} else {
 			this.text = "";
 		}
-		
+
 		if (this.parentElement !== null) {
 			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
 				if (this.parentElement.tagName == "CUSTOM-SELECT") {
@@ -31,7 +31,7 @@ class SelectOptionGroup extends HTMLElement {
 			}
 		}
 	}
-	
+
 	selectOption(option) {
 		if (this.parentElement !== null) {
 			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
@@ -41,11 +41,11 @@ class SelectOptionGroup extends HTMLElement {
 			}
 		}
 	}
-	
+
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			
+
 //			if (record.type == "childList") {
 				this.updateParent();
 //			}
@@ -60,23 +60,23 @@ class SelectOption extends HTMLElement {
 
 		this._selected = false;
 		this._disabled = false;
-		
+
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
 		let observationConfig = {attributeFilter: ["selected", "disabled"], attributes: true, characterData: true, childList: true, subtree: true};
 		observer.observe(this, observationConfig);
-		
+
 		this.update();
 		this.updateParent();
     }
-	
+
 	connectedCallback() {
 		this.update();
 		this.updateParent();
 	}
-	
+
 	set selected(value) {
 		this._selected = value;
-		
+
 		if (this.parentElement !== null) {
 			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
 				if (this.parentElement.tagName == "CUSTOM-SELECT" || this.parentElement.tagName == "SELECT-OPTION-GROUP") {
@@ -85,24 +85,24 @@ class SelectOption extends HTMLElement {
 			}
 		}
 	}
-	
+
 	get selected() {
 		return this._selected;
 	}
-		
+
 	set disabled(value) {
 		this._disabled = value;
 	}
-	
+
 	get disabled() {
 		return this._disabled;
 	}
-	
+
 	update() {
 		this._selected = this.getAttribute("selected") !== null;
 		this._disabled = this.getAttribute("disabled") !== null;
 	}
-	
+
 	updateParent() {
 		if (this.parentElement !== null) {
 			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
@@ -114,11 +114,11 @@ class SelectOption extends HTMLElement {
 			}
 		}
 	}
-	
+
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			
+
 			if (record.type == "attributes") {
 				if (record.attributeName == "selected") {
 					if (this.getAttribute("selected") !== null) {
@@ -199,7 +199,7 @@ class CustomSelect extends HTMLElement {
 				{name: "Aluminum cans"}
 			]}
 		];
-		
+
 		this.buildList();
 
 		display.addEventListener("click", (event) => {
@@ -292,26 +292,26 @@ class CustomSelect extends HTMLElement {
 	connectedCallback() {
 		this.buildList();
 	}
-	
+
 	buildList() {
 		while (this.picker.firstChild) {
 			this.picker.removeChild(this.picker.firstChild);
 		}
-		
+
 		let post = (item, depth) => {
 			let isGroup = item.tagName == "SELECT-OPTION-GROUP";
-			
+
 			let itemOption = document.createElement("div");
 			itemOption.className = "item";
 			itemOption.innerText = isGroup ? item.text : item.innerText;
 			itemOption.style.paddingLeft = (15 * depth) + "px";
 			itemOption.selectOption = item;
-			
+
 			itemOption.addEventListener("click", () => {
 				this.selectOption(itemOption.selectOption);
 				this.picker.style.display = "none";
 			});
-			
+
 			this.picker.appendChild(itemOption);
 
 			if (item.selected) {
@@ -322,7 +322,7 @@ class CustomSelect extends HTMLElement {
 				itemOption.style.color = "#999";
 				itemOption.className = "item disabled";
 			}
-			
+
 			if (isGroup) {
 				for (let i = 0; i < item.children.length; i++) {
 					post(item.children[i], depth + 1);
@@ -334,11 +334,11 @@ class CustomSelect extends HTMLElement {
 			post(this.children[i], 1);
 		}
 	}
-	
+
 	selectOption(option) {
 		let deselect = (item) => {
 			let isGroup = item.tagName == "SELECT-OPTION-GROUP";
-			
+
 			if (isGroup) {
 				for (let i = 0; i < item.children.length; i++) {
 					deselect(item.children[i], 1);
@@ -347,19 +347,19 @@ class CustomSelect extends HTMLElement {
 				item._selected = false;
 			}
 		};
-		
+
 		for (let i = 0; i < this.children.length; i++) {
 			deselect(this.children[i]);
 		}
-		
+
 		option._selected = true;
 		this.displayLabel.innerText = option.innerText;
 	}
-	
+
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			
+
 			if (record.type == "childList") {
 				this.buildList();
 			}
@@ -432,22 +432,22 @@ class CategoryBag extends HTMLElement {
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
-		
+
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
 		let observationConfig = {attributeFilter: ["number"], attributes: true};
 		observer.observe(this, observationConfig);
 	}
-	
+
 	connectedCallback() {
 		if (this.getAttribute("number") !== null) {
 			this.wrapper.dataset.label = `Bag #${this.getAttribute("number")}`;
 		}
 	}
-	
+
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			
+
 			if (record.type == "attributes") {
 				if (this.getAttribute("number") !== null) {
 					this.wrapper.dataset.label = `Bag #${this.getAttribute("number")}`;
@@ -480,10 +480,10 @@ class CategoryBox extends HTMLElement {
 
 		let customSelect = document.createElement("custom-select");
 //		customSelect.setAttribute("selected", "Recyclable Paper");
-		
+
 		let bagContainer = document.createElement("div");
 		this.bagContainer = bagContainer;
-		
+
 		let bag = document.createElement("category-bag");
 		bag.setAttribute("number", 1);
 
@@ -492,7 +492,7 @@ class CategoryBox extends HTMLElement {
 
 		let button = document.createElement("button");
 		button.className = "fab icon";
-		
+
 		let buttonContent = document.createElement("div");
 		buttonContent.className = "button-content";
 
@@ -523,26 +523,26 @@ class CategoryBox extends HTMLElement {
 		// Attach the created elements to the shadow dom
 		shadow.appendChild(style);
 		shadow.appendChild(wrapper);
-		
+
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
 		let observationConfig = {childList: true};
 		observer.observe(bagContainer, observationConfig);
 	}
-	
+
 	numberBags() {
 		console.log(this.bagContainer.children);
 		for (let i = 0; i < this.bagContainer.children.length; i++) {
 			let bag = this.bagContainer.children[i];
-			
+
 			bag.setAttribute("number", i + 1);
 		}
 	}
-	
+
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
 			console.log(record);
-			
+
 			if (record.type == "childList") {
 				this.numberBags();
 			}
@@ -557,7 +557,7 @@ customElements.define("category-bag", CategoryBag);
 customElements.define("category-box", CategoryBox);
 
 /*
-//Initialize databsase
+//Initialize database
 let config = {
 	apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
 	authDomain: "oooooo-1cb0d.firebaseapp.com",

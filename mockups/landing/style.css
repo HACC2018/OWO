@@ -47,3 +47,12 @@ li {
     padding: 0;
     margin-bottom: 12px;
 }
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;
+  background-color:#FFFF00;
+  height: 1px;
+}
