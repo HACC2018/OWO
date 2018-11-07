@@ -1,11 +1,15 @@
 :root {
-	--primary-color: #41C300;
-	--primary-color-darker: #009F00;
+/*	--primary-color: #41C300;*/
+	--primary-color: #2DB300;
+/*	--primary-color-darker: #009F00;*/
+	--primary-color-darker: #069200;
 	--primary-color-text: #FFF;
 	--secondary-color: #0041C3;
-	--secondary-color-darker: #002CAC;
+/*	--secondary-color-darker: #002CAC;*/
+	--secondary-color-darker: #002DB3;
 	--secondary-color-text: #FFF;
-	--accent-color: #008F00;
+/*	--accent-color: #008F00;*/
+	--accent-color: #008104;
 	--accent-color-text: #FFF;
 	
 	--header-height: 62px;
