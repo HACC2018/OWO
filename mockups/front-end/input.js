@@ -239,7 +239,6 @@ class CategoryBag extends HTMLElement {
 		let style = document.createElement("style");
 		style.textContent = `
 @import "input.css";
-@import "global.css";
 @import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 
@@ -276,7 +275,6 @@ class CategoryBox extends HTMLElement {
 		let bag = document.createElement("category-bag");
 
 		let div = document.createElement("div");
-		div.className = "right";
 
 		let button = document.createElement("button");
 		button.className = "fab icon";
@@ -286,21 +284,32 @@ class CategoryBox extends HTMLElement {
 
 		let buttonLabel = document.createTextNode("Bag");
 
-		 wrapper.appendChild(del);
-		 del.appendChild(delspan);
-		 wrapper.appendChild(h3);
-		 wrapper.appendChild(categorySelect);
-		 wrapper.appendChild(bag);
-		 wrapper.appendChild(div);
-		 div.appendChild(button);
-		 button.appendChild(buttonspan);
-		 button.appendChild(buttonLabel);
+		// wrapper.appendChild(del);
+		// del.appendChild(delspan);
+		// wrapper.appendChild(h3);
+		// wrapper.appendChild(categorySelect);
+		// wrapper.appendChild(bag);
+		// wrapper.appendChild(div);
+		// div.appendChild(button);
+		// button.appendChild(buttonspan);
+		// button.appendChild(buttonLabel);
 
 		let style = document.createElement("style");
 		style.textContent = `
-@import "input.css";
-@import "global.css";
-@import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
+.data-category {
+	position: relative;
+	margin: 24px 0 8px 0;
+	padding: 15px;
+	border-radius: 4px;
+	border: 1px solid #DADCE0;
+	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
+}
+
+.delete {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+}
 `;
 
 		// Attach the created elements to the shadow dom
@@ -313,42 +322,66 @@ customElements.define("category-select", CategorySelect);
 customElements.define("category-bag", CategoryBag);
 customElements.define("category-box", CategoryBox);
 
-/*
-// Saves a new form on the Firebase DB.
-function saveAuditForm(elementvalue) {
-  // Add a new form entry to the Firebase Database.
+//Initialize databsase
+let config = {
+	apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+	authDomain: "oooooo-1cb0d.firebaseapp.com",
+	databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+	projectId: "oooooo-1cb0d",
+	storageBucket: "oooooo-1cb0d.appspot.com",
+	messagingSenderId: "928900583874"
+};
+firebase.initializeApp(config);
 
-}
+let db = firebase.firestore();
+db.settings({timestampsInSnapshots: true});
 
-
-// Triggered when the send new audit form is submitted.
-function onAuditFormSubmit(e) {
-  e.preventDefault();
-  // Check that the new form is submitted.
-
-}
-
-//Creates new category on audit form
-function onAddCategory(e) {
+//Skeleton for adding into database
+submitForm(e) {
 	e.preventDefault();
+	//Grabs all category container DOM elements
+	let cat_containers = auditFormElement.getElementByClassName("data-category");
+	//A temporary array that stores all categories in the form
+	let temp_cat = [];
+	int i;
+	//Loop through all category containers
+	for(i = 0; i < cat_containers.length(); i++) {
+		//Grabs all DOM bag elements in a container
+		let bags = cat_containers[i].getElementByClassName("data-category category-label");
+		int j;
+		let temp_bags = [];
+		for(j = 0; j < bags.length(); j++) {
+			//Grabs values of each bag
+			let weight = bags[j].getElementByClassName("weight").value;
+			let volume = bags[j].getElementByClassName("volume").value;
+			//Creates a bag and stores it into array
+			let bag = {
+				weight: weight,
+				volume: volume
+			}
+			temp_bag.push(bag);
+		}
+		//Creates container and stores it into an array
+		let cat_container = {
+			category_name: ,
+			bags: temp_bags
+		}
+		temp_cat.push(cat_container);
+	}
+	//Adds audit form into database
+	db.collection("collection").add({
+    bag_vol: ,
+    bucket_tare: ,
+		date: ,
+		email: ,
+		location: ,
+		notes: ,
+		recorder_name: ,
+		categories: temp_cat
+	})
 }
 
-//Create new bags in category
-function onAddBags(e) {
-	e.preventDefault();
-}
-
-/
-var CATEGORY_TEMPLATE =
-    '<div class="category-data">' +
-		'<div class="show-whitespace delete" style="font-size: 28px;">' +
-		'</div>' +
-    '</div>';
-
-let auditFormElement = document.getElementById('audit-form');
-let auditInputElement = document.getElementById('audit');
-let auditListofCategories = document.getElementById('category-list');
-
-auditFormElement.addEventListener('submit', onAuditFormSubmit);
-auditFormElement.addEventListener('add-category', onAddCategory);
-*/
+//Reference to database
+let dbAuditForms = db.collection.('collection');
+let auditFormElement = document.getElementById("audit-form");
+auditFormElement.addEventListener('submit', onAuditFormSubmit)
