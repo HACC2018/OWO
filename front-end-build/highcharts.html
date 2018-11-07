@@ -1,49 +1,47 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <title>Data Visualized</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <Link rel="stylesheet" href="style/global.css">
-  <link rel="stylesheet" type="text/css" href="style/highcharts-stylesheet.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-  <script>
-      // Initialize Firebase
-      let config = {
-        apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
-        authDomain: "oooooo-1cb0d.firebaseapp.com",
-        databaseURL: "https://oooooo-1cb0d.firebaseio.com",
-        projectId: "oooooo-1cb0d",
-        storageBucket: "oooooo-1cb0d.appspot.com",
-        messagingSenderId: "928900583874"
-      };
-      firebase.initializeApp(config);
+	<head>
+		<title>Data Visualized</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="style/global.css">
+		<link rel="stylesheet" type="text/css" href="style/highcharts.css">
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+		<script>
+			// Initialize Firebase
+			let config = {
+				apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+				authDomain: "oooooo-1cb0d.firebaseapp.com",
+				databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+				projectId: "oooooo-1cb0d",
+				storageBucket: "oooooo-1cb0d.appspot.com",
+				messagingSenderId: "928900583874"
+			};
+			firebase.initializeApp(config);
 
-      let db = firebase.firestore();
-      db.settings({ timestampsInSnapshots: true });
-  </script>
-  <script src="script/pie-chart.js" defer></script>
-  <script src="script/bar-chart.js" defer></script>
-</head>
-<body>
+			let db = firebase.firestore();
+			db.settings({ timestampsInSnapshots: true });
+		</script>
+		<script src="script/pie-chart.js" defer></script>
+		<script src="script/bar-chart.js" defer></script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="item brand"><img src="image/logo_white.png"></div>
+			<div class="item">Home</div>
+			<div class="item">Events</div>
+			<div class="item">About</div>
+		</div>
+		<div class="content">
+			<div  id="container" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div><div id="container2" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
+		</div>
 
-<div class="header">
-  <div class="item">Oʻahu Waste Organization</div>
-  <div class="item">Home</div>
-  <div class="item">News</div>
-  <div class="item">Events</div>
-  <div class="item">Learn More</div>
-</div>
-<div class="content">
-<div  id="container" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div><div id="container2" style="display: inline-block; width: 50%; height: 400px; margin: 0 "></div>
-</div>
-
-<div class="footer">
-  Oʻahu Waste Organization
-  <hr>
-  A team project for HACC 2018
-</div>
-</body>
+		<div class="footer">
+			Oʻahu Waste Organization
+			<hr>
+			A team project for HACC 2018
+		</div>
+	</body>
 </html>
