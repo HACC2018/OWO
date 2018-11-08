@@ -5,20 +5,19 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto%7CRoboto+Mono" rel="stylesheet">
 		<link rel="stylesheet" href="style/global.css">
 		<link rel="stylesheet" href="style/index.css">
 		<link rel="stylesheet" href="style/login.css">
 	</head>
 	<body>
 		<div class="header">
-			<div class="header">
-				<a href="index.html" class="item brand"><img src="image/logo_white.png"></a>
-				<a href="events.html" class="item">Events</a>
-				<a href="highcharts.html" class="item">Charts and Graphs</a>
-				<a href="heatmap.html" class="item">Heat Map</a>
-				<a href="about.html" class="item">About</a>
-			</div>
+			<a href="index.html" class="item brand"><img src="image/logo_white.png"></a>
+			<a href="events.html" class="item">Events</a>
+			<a href="highcharts.html" class="item">Charts and Graphs</a>
+			<a href="heatmap.html" class="item">Heat Map</a>
+			<a href="about.html" class="item">About</a>
+		</div>
 		<div class="header-placeholder"></div>
 
 		<div class="content">
@@ -63,56 +62,56 @@
 					<button type="submit">Login</button>
 				</div>
 
-    <div class="container" style="background-color:#f1f1f1">
-      <span class="psw">Forgot <a href="#" id="passwordChange">password?</a></span>
-    </div>
-  </form>
-</div>
+				<div class="container" style="background-color:#f1f1f1">
+					<span class="psw">Forgot <a href="#" id="passwordChange">password?</a></span>
+				</div>
+			</form>
+		</div>
+		<div id="id02" class="modal">
 
-<div id="id02" class="modal">
+			<form class="modal-content animate" action="/action_page.php">
+				<div class="imgcontainer">
+					<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+				</div>
 
-<form class="modal-content animate" action="/action_page.php">
-<div class="imgcontainer">
-  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-</div>
+				<div class="container" id="changeme">
+					<label><b>Please enter email so we can help!</b></label>
+					<input type="text" placeholder="Enter Email" required>
 
-<div class="container" id="changeme">
-  <label><b>Please enter email so we can help!</b></label>
-  <input type="text" placeholder="Enter Email" required>
+					<button type="submit">Submit</button>
+				</div>
 
-  <button type="submit">Submit</button>
-</div>
+				<div class="container" style="background-color:#f1f1f1">
+					<span class="psw">Return to <a href="#" id="returnlogin">login</a></span>
+				</div>
+			</form>
+		</div>
 
-<div class="container" style="background-color:#f1f1f1">
-  <span class="psw">Return to <a href="#" id="returnlogin">login</a></span>
-</div>
-</form>
-</div>
-
-<script>
-  // Get the modal
-  var modal = document.getElementById('id01');
-  var modal2 = document.getElementById('id02');
-  document.getElementById("passwordChange").addEventListener("click", onEmail);
-  document.getElementById("returnlogin").addEventListener("click", onReturn);
-  function onEmail(e){
-    e.preventDefault();
-    modal.style.display = "none";
-    modal2.style.display = "block";
-  }
-  function onReturn(e){
-    e.preventDefault();
-    modal.style.display = "block";
-    modal2.style.display = "none";
-  }
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal || event.target == modal2) {
-      modal.style.display = "none";
-      modal2.style.display = "none";
-    }
-  }
-</script>
+		<script>
+			// Get the modal
+			var modal = document.getElementById('id01');
+			var modal2 = document.getElementById('id02');
+			document.getElementById("passwordChange").addEventListener("click", onEmail);
+			document.getElementById("returnlogin").addEventListener("click", onReturn);
+			function onEmail(e){
+				e.preventDefault();
+				modal.style.display = "none";
+				modal2.style.display = "block";
+			}
+			function onReturn(e){
+				e.preventDefault();
+				modal.style.display = "block";
+				modal2.style.display = "none";
+			}
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal || event.target == modal2) {
+					modal.style.display = "none";
+					modal2.style.display = "none";
+				}
+			}
+		</script>
 
 	</body>
 </html>
+
