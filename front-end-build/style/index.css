@@ -2,69 +2,23 @@
 	padding: 0;
 }
 
-.banner {
+.trapezoid {
+	border-bottom: 600px solid #373737;
+	border-left: 0px solid transparent;
+	border-right: 25vw solid transparent;
+	height: 0;
+	width: 50vw;
+}
+
+body {
+	background-image: url("https://camping.ehawaii.gov/camping/resources/spc,resource,31720,p,1,null,Waimanu%20valley.JPG");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 60px -400px;
+}
+
+.lighten {
 	width: 100%;
-	padding: 20vh 60px;
-	padding: 90px 96px;
-	background: linear-gradient(135deg, #0042c0 0%,#021b9b 100%);
-	background: linear-gradient(135deg, var(--secondary-color) 0%,var(--secondary-color-darker)  100%);
-	background: var(--accent-color);
-	background: #9Fd992;
-	background: var(--primary-color);
-	color: #FFF;
-/*	color: var(--accent-color);*/
-	font-size: 3em;
-	font-weight: 500;
-	text-align: center;
-	box-sizing: border-box;
-}
-
-.title{
-  font-family: monospace;
-    font-size: 18px;
-    line-height: 24px;
-    text-transform: none;
-    letter-spacing: 1.2px;
-    font-weight: 500;
-    margin-top: 0;
-    padding: 0;
-    margin-bottom: 12px;
-}
-
-.center{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
- .trapezoid {
-   border-bottom: 600px solid #373737;
-   border-left: 0px solid transparent;
-   border-right: 25vw solid transparent;
-   height: 0;
-   width: 50vw;
- }
-
- body {
-   background-image: url("https://oneclassblog.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-11-at-10.02.44-AM.png");
-   background-image: url("https://camping.ehawaii.gov/camping/resources/spc,resource,31720,p,1,null,Waimanu%20valley.JPG");
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position: 60px -400px;
- }
-
-hr {
-  border: 0;
-  clear:both;
-  display:block;
-  width: 96%;
-  background-color:#FFFF00;
-  height: 1px;
-}
-
-#darken {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.3);
 }

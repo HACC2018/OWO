@@ -158,6 +158,11 @@ hr {
 	background: var(--accent-color-text);
 }
 
+.footer a {
+	color: var(--accent-color-text);
+	text-decoration: none;
+}
+
 button .button-content {
 	display: flex;
 	align-items: center;
