@@ -1,14 +1,14 @@
 :root {
-/*	--primary-color: #41C300;*/
+	/*	--primary-color: #41C300;*/
 	--primary-color: #2DB300;
-/*	--primary-color-darker: #009F00;*/
+	/*	--primary-color-darker: #009F00;*/
 	--primary-color-darker: #069200;
 	--primary-color-text: #FFF;
 	--secondary-color: #0041C3;
-/*	--secondary-color-darker: #002CAC;*/
+	/*	--secondary-color-darker: #002CAC;*/
 	--secondary-color-darker: #002DB3;
 	--secondary-color-text: #FFF;
-/*	--accent-color: #008F00;*/
+	/*	--accent-color: #008F00;*/
 	--accent-color: #008104;
 	--accent-color: #006200;
 	--accent-color-text: #FFF;
@@ -82,7 +82,7 @@ button {
 	font-weight: 500;
 	font-size: 14px;
 	box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+	box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 	cursor: pointer;
 	user-select: none;
 	transition: background var(--hover-transition-time);
@@ -100,7 +100,7 @@ hr {
 }
 
 .header a {
-  color: white;
+	color: white;
 }
 
 .header {
@@ -112,7 +112,7 @@ hr {
 	color: var(--primary-color-text);
 	line-height: var(--header-height);
 	font-size: 18px;
-	box-shadow: 0 2px 6px 0 rgba(60,64,67,.15);
+	box-shadow: 0 2px 6px 0 rgba(60, 64, 67, .15);
 }
 
 .header .item {
@@ -126,8 +126,8 @@ hr {
 
 .header .brand {
 	padding-left: 0;
-    transition: background var(--hover-transition-time);
-    
+	transition: background var(--hover-transition-time);
+
 }
 
 .header .item.brand img {
@@ -136,13 +136,13 @@ hr {
 	padding-bottom: 10px;
 	padding-left: 0;
 	box-sizing: border-box;
-    cursor: pointer;
-    transition: background var(--hover-transition-time);
+	cursor: pointer;
+	transition: background var(--hover-transition-time);
 }
 
 .header .item:not(.brand):hover {
 	background: var(--primary-color-darker);
-    transition: background var(--hover-transition-time);
+	transition: background var(--hover-transition-time);
 }
 
 .content {
@@ -175,7 +175,7 @@ button .button-content {
 }
 
 .fab {
-/*	display: inline-flex;*/
+	/*	display: inline-flex;*/
 	min-width: 128px;
 	height: 48px;
 	margin: 0;

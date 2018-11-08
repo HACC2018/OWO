@@ -1,16 +1,16 @@
 class SelectOptionGroup extends HTMLElement {
-    constructor() {
-        // Always call super first in constructor
-        super();
+	constructor() {
+		// Always call super first in constructor
+		super();
 
 		this.text = "";
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
-		let observationConfig = {attributeFilter: ["text"], attributes: true, childList: true};
+		let observationConfig = { attributeFilter: ["text"], attributes: true, childList: true };
 		observer.observe(this, observationConfig);
 
 		this.updateParent();
-    }
+	}
 
 	connectedCallback() {
 		this.updateParent();
@@ -47,27 +47,27 @@ class SelectOptionGroup extends HTMLElement {
 			let record = records[i];
 
 //			if (record.type == "childList") {
-				this.updateParent();
+			this.updateParent();
 //			}
 		}
 	}
 }
 
 class SelectOption extends HTMLElement {
-    constructor() {
-        // Always call super first in constructor
-        super();
+	constructor() {
+		// Always call super first in constructor
+		super();
 
 		this._selected = false;
 		this._disabled = false;
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
-		let observationConfig = {attributeFilter: ["selected", "disabled"], attributes: true, characterData: true, childList: true, subtree: true};
+		let observationConfig = { attributeFilter: ["selected", "disabled"], attributes: true, characterData: true, childList: true, subtree: true };
 		observer.observe(this, observationConfig);
 
 		this.update();
 		this.updateParent();
-    }
+	}
 
 	connectedCallback() {
 		this.update();
@@ -113,9 +113,10 @@ class SelectOption extends HTMLElement {
 			if (this.parentElement.nodeType == document.ELEMENT_NODE) {
 				if (this.parentElement.tagName == "CUSTOM-SELECT") {
 					this.parentElement.buildList();
-				} else if (this.parentElement.tagName == "SELECT-OPTION-GROUP") {
-					this.parentElement.updateParent();
-				}
+				} else
+					if (this.parentElement.tagName == "SELECT-OPTION-GROUP") {
+						this.parentElement.updateParent();
+					}
 			}
 		}
 	}
@@ -135,11 +136,12 @@ class SelectOption extends HTMLElement {
 							}
 						}
 					}
-				} else if (record.attributeName == "disabled") {
-					this._disabled = this.hasAttribute("disabled");
-				} else {
-					this.updateParent();
-				}
+				} else
+					if (record.attributeName == "disabled") {
+						this._disabled = this.hasAttribute("disabled");
+					} else {
+						this.updateParent();
+					}
 			}
 		}
 	}
@@ -149,12 +151,12 @@ class CustomSelect extends HTMLElement {
 	constructor() {
 		// Always call super first in constructor
 		super();
-		
+
 		this.showing = false;
 		let selected = this.getAttribute("selected");
 
 		// Create a shadow root
-		let shadow = this.attachShadow({mode: "open"});
+		let shadow = this.attachShadow({ mode: "open" });
 
 		// Create elements
 		let wrapper = document.createElement("div");
@@ -175,7 +177,7 @@ class CustomSelect extends HTMLElement {
 		picker.className = "picker";
 		picker.style.display = "none";
 		this.picker = picker;
-		
+
 		this.buildList();
 
 		// This is a memory leak, because the event listener is never removed
@@ -281,7 +283,7 @@ class CustomSelect extends HTMLElement {
 		wrapper.appendChild(picker);
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
-		let observationConfig = {childList: true};
+		let observationConfig = { childList: true };
 		observer.observe(this, observationConfig);
 	}
 
@@ -290,7 +292,7 @@ class CustomSelect extends HTMLElement {
 			while (this.firstChild) {
 				this.removeChild(this.firstChild);
 			}
-			
+
 			for (let i = 0; i < window.categoryData.length; i++) {
 				let parent = window.categoryData[i];
 
@@ -306,23 +308,23 @@ class CustomSelect extends HTMLElement {
 				this.appendChild(optionGroup);
 			}
 		};
-		
+
 		if (window.categoryData) {
 			fill();
 		} else {
 			let fillCallback;
-			
+
 			fillCallback = () => {
 				window.removeEventListener("categories-loaded", fillCallback);
 				fill();
 			};
-			
+
 			window.addEventListener("categories-loaded", fillCallback);
 		}
-		
+
 		this.buildList();
 	}
-	
+
 	show() {
 		let rectangle = this.wrapper.getBoundingClientRect();
 		let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -332,15 +334,15 @@ class CustomSelect extends HTMLElement {
 		this.picker.style.display = "block";
 		this.picker.style.height = `${pickerHeight}px`;
 		this.pickerUnderlay.style.display = "block";
-		
+
 		if (viewportHeight < bodyHeight) {
 			document.body.style.overflow = "hidden";
 			document.body.style.paddingRight = "17px";
 		}
-		
+
 		this.showing = true;
 	}
-	
+
 	hide() {
 		this.picker.style.display = "none";
 		this.pickerUnderlay.style.display = "none";
@@ -348,7 +350,7 @@ class CustomSelect extends HTMLElement {
 		document.body.style.paddingRight = "";
 		this.showing = false;
 	}
-	
+
 	buildList() {
 		while (this.picker.firstChild) {
 			if (this.picker.firstChild.clickCallback) {
@@ -365,18 +367,18 @@ class CustomSelect extends HTMLElement {
 			itemOption.innerText = isGroup ? item.text : item.innerText;
 			itemOption.style.paddingLeft = (15 * depth) + "px";
 			itemOption.selectOption = item;
-			
+
 			let clickCallback = () => {
 				if (item.tagName == "SELECT-OPTION-GROUP" || item.disabled) {
 					return;
 				}
-				
+
 				this.selectOption(itemOption.selectOption);
 				this.hide();
 			};
 			itemOption.clickCallback = clickCallback;
 			itemOption.addEventListener("click", clickCallback);
-			
+
 			this.picker.appendChild(itemOption);
 
 			if (item.selected) {
@@ -439,7 +441,7 @@ class CategoryBag extends HTMLElement {
 		super();
 
 		// Create a shadow root
-		let shadow = this.attachShadow({mode: "open"});
+		let shadow = this.attachShadow({ mode: "open" });
 
 		// Create elements
 		let wrapper = document.createElement("div");
@@ -478,7 +480,7 @@ class CategoryBag extends HTMLElement {
 		inputVolume.className = "data-content";
 		inputVolume.setAttribute("placeholder", "Volume");
 		inputVolume.style.width = "100%";
-		
+
 		del.addEventListener("click", () => {
 			if (this.parentElement !== null) {
 				if (this.parentElement.nodeType == document.ELEMENT_NODE) {
@@ -508,7 +510,7 @@ class CategoryBag extends HTMLElement {
 		shadow.appendChild(wrapper);
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
-		let observationConfig = {attributeFilter: ["number"], attributes: true};
+		let observationConfig = { attributeFilter: ["number"], attributes: true };
 		observer.observe(this, observationConfig);
 	}
 
@@ -537,7 +539,7 @@ class CategoryBox extends HTMLElement {
 		super();
 
 		// Create a shadow root
-		let shadow = this.attachShadow({mode: "open"});
+		let shadow = this.attachShadow({ mode: "open" });
 
 		// Create elements
 		let wrapper = document.createElement("div");
@@ -574,7 +576,7 @@ class CategoryBox extends HTMLElement {
 		buttonspan.className = "icon mdi mdi-plus";
 
 		let buttonLabel = document.createTextNode("Bag");
-		
+
 		del.addEventListener("click", () => {
 			if (this.parentElement !== null) {
 				if (this.parentElement.nodeType == document.ELEMENT_NODE) {
@@ -582,7 +584,7 @@ class CategoryBox extends HTMLElement {
 				}
 			}
 		});
-		
+
 		button.addEventListener("click", () => {
 			let bag = document.createElement("category-bag");
 			bagContainer.appendChild(bag);
@@ -612,7 +614,7 @@ class CategoryBox extends HTMLElement {
 		shadow.appendChild(wrapper);
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
-		let observationConfig = {childList: true};
+		let observationConfig = { childList: true };
 		observer.observe(bagContainer, observationConfig);
 	}
 
@@ -627,7 +629,7 @@ class CategoryBox extends HTMLElement {
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			
+
 			if (record.type == "childList") {
 				if (this.bagContainer.children.length == 0) {
 					let bag = document.createElement("category-bag");

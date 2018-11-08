@@ -3,24 +3,24 @@
 }
 
 .title {
-  font-weight: bolder;
-  font-size: 30px;
+	font-weight: bolder;
+	font-size: 30px;
 }
 
 #contactColumn {
-  float: left;
-  width: 10%;
+	float: left;
+	width: 10%;
 }
 
 .grad-background {
-  background: url('http://www.hawaii.edu/news/attachments/img8876_7609l.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height: 500px;
+	background: url('http://www.hawaii.edu/news/attachments/img8876_7609l.jpg') no-repeat center center fixed;
+	background-size: cover;
+	height: 500px;
 }
 
 .darken {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
