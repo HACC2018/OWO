@@ -11,7 +11,7 @@ input[type=text], input[type=password] {
 /* Center the image and position the close button */
 .imgcontainer {
 	text-align: center;
-	margin: 24px 0 12px 0;
+	margin: 2px 0 25px 0;
 	position: relative;
 }
 
@@ -43,13 +43,14 @@ input[type=text], input[type=password] {
 	background-color: #fefefe;
 	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
 	border: 1px solid #888;
-	width: 80%; /* Could be more or less, depending on screen size */
+	width: 40%; /* Could be more or less, depending on screen size */
+	border-radius: 4px;
 }
 
 /* The Close Button (x) */
 .close {
 	position: absolute;
-	right: 25px;
+	right: 15px;
 	top: 0;
 	color: #000;
 	font-size: 35px;
@@ -93,20 +94,7 @@ input[type=text], input[type=password] {
 		float: none;
 	}
 
-	.cancelbtn {
-		width: 100%;
-	}
 }
 
-.login-button {
-	text-align: center;
-	position: absolute;
-	top: 40%
-}
 
-.center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
-}
+
