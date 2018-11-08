@@ -1,0 +1,1 @@
+OWO is a web application that allows trash audits at the UH Manoa campus 
