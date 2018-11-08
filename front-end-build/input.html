@@ -4,8 +4,8 @@
 		<title>Audit Data - OWO</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		
-		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
 		<link href="style/global.css" rel="stylesheet">
 		<link href="style/input.css" rel="stylesheet">
@@ -27,16 +27,16 @@
 
 				let db = firebase.firestore();
 				db.settings({timestampsInSnapshots: true});
-				
+
 				let categoryDocRef = db.collection("global").doc("categories");
-				
+
 				categoryDocRef.get().then((categoryDoc) => {
 					if (categoryDoc.exists) {
 						window.categoryData = categoryDoc.data().categories;
 						window.dispatchEvent(new Event("categories-loaded"));
 					}
 				});
-				
+
 				document.getElementById("new-category").addEventListener("click", () => {
 					let category = document.createElement("category-box");
 					document.getElementById("category-container").appendChild(category);
@@ -46,8 +46,7 @@
 	</head>
 	<body>
 		<div class="header">
-			<div class="item brand"><img src="image/logo_white.png"></div>
-			<a href="index.html" class="item">Home</a>
+			<a href="index.html" class="item brand"><img src="image/logo_white.png"></a>
 			<a href="events.html" class="item">Events</a>
 			<a href="highcharts.html" class="item">Charts and Graphs</a>
 			<a href="heatmap.html" class="item">Heat Map</a>

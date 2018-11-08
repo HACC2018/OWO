@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Data Visualized - OWO</title>
+  <title>Charts and Graphs - OWO</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
   <link rel="stylesheet" href="style/global.css">
-  <link rel="stylesheet" type="text/css" href="style/highcharts.css">
+  <link rel="stylesheet" href="style/highcharts.css">
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-firestore.js"></script>
   <script>
 
     // Initialize Firebase
@@ -32,8 +34,7 @@
 
 <body>
 <div class="header">
-  <div class="item brand"><img src="image/logo_white.png"></div>
-  <a href="index.html" class="item">Home</a>
+  <a href="index.html" class="item brand"><img src="image/logo_white.png"></a>
   <a href="events.html" class="item">Events</a>
   <a href="highcharts.html" class="item">Charts and Graphs</a>
   <a href="heatmap.html" class="item">Heat Map</a>
@@ -41,7 +42,9 @@
 </div>
 
 <div class="content">
-  <div id="container" class="chart"></div><div id="container2" class="chart"></div><div id="container3" class="chart"></div>
+  <div id="container2" class="chart"></div>
+  <div id="container" class="chart"></div>
+  <div id="container3" class="chart"></div>
 </div>
 
 <div class="footer">

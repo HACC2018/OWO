@@ -1,7 +1,7 @@
 
 Highcharts.chart('container2', {
   title: {
-    text: 'Waste Audits of 2017'
+    text: '2017 Analysis'
   },
   xAxis: {
     categories: ['Items of Interest', 'Paper', 'Plastic', 'Glass', 'Metals', 'Organics', 'Misc']
@@ -11,17 +11,6 @@ Highcharts.chart('container2', {
     title: {
       text: 'Pounds (Ibs)'
     }
-  },
-
-  labels: {
-    items: [{
-      html: 'Waste by Category of UH Manoa Buildings',
-      style: {
-        left: '50px',
-        top: '0px',
-        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-      }
-    }]
   },
 
   tooltip: {

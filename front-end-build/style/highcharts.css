@@ -1,6 +1,6 @@
 .chart {
-	display: inline-block;
-	width: 50%;
-	height: 400px;
-	margin: 0;
+	width: 75%;
+	height: 50vh;
+	margin: 10px auto;
+  border: 1px solid #C0C0C0;
 }
