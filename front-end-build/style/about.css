@@ -1,7 +1,5 @@
-.navbar {
-  background-color: black;
-  width: 100%;
-  text-align: center;
+.content {
+	padding: 0;
 }
 
 .title {
@@ -9,19 +7,9 @@
   font-size: 30px;
 }
 
-li {
-  float: none;
-  display: inline-block;
-}
-
 #contactColumn {
   float: left;
   width: 10%;
-}
-
-#impactColumn {
-  float: right;
-  width: 30%;
 }
 
 .grad-background {
@@ -30,7 +18,7 @@ li {
   height: 500px;
 }
 
-#darken {
+.darken {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
