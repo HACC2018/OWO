@@ -37,6 +37,11 @@
 						window.dispatchEvent(new Event("categories-loaded"));
 					}
 				});
+				
+				document.getElementById("new-category").addEventListener("click", () => {
+					let category = document.createElement("category-box");
+					document.getElementById("category-container").appendChild(category);
+				});
 			});
 		</script>
 	</head>
@@ -66,31 +71,9 @@
 				<h2>Notes</h2>
 				<textarea class="data-content" style="max-width: 100%; min-width: 100%; width: 100%; min-height: 72px;" placeholder="Notes"></textarea>
 			</div>
-			<category-box></category-box>
-			<div class="hide-whitespace">
-				<div class="data-category">
-					<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
-					<h3>Category</h3>
-					<custom-select selected="Select a category..."></custom-select>
-					<div class="data-category category-label" data-label="Bag #1">
-						<div class="show-whitespace delete"><span class="mdi mdi-close"></span></div>
-						<div class="half">
-							<h3>Weight (lbs)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Weight">
-						</div>
-						<div class="half">
-							<h3>Volume (gal)</h3>
-							<input type="number" class="data-content" style="width: calc(100% - 15px);" placeholder="Volume">
-						</div>
-					</div>
-					<category-bag></category-bag>
-					<div class="right">
-						<button class="fab icon"><div class="button-content"><span class="icon mdi mdi-plus"></span>Bag</div></button>
-					</div>
-				</div>
-			</div>
-			<div style="text-align: right; position: sticky; bottom: 20px; right: 20px;">
-				<button class="fab icon">
+			<div id="category-container"><category-box></category-box></div>
+			<div class="sticky-bottom">
+				<button id="new-category" class="fab icon">
 					<div class="button-content">
 						<div class="icon mdi mdi-plus" style="margin-right: 5px; font-size: 28px;"></div>
 						<span style="font-size: 24px;">/</span>

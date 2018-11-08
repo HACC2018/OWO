@@ -47,10 +47,23 @@
 	font-size: 28px;
 	line-height: 28px;
 	transition: background var(--hover-transition-time);
+	cursor: pointer;
 }
 
 .delete:hover {
 	background: rgba(0, 0, 0, 0.15);
+}
+
+.fab {
+	pointer-events: all;
+}
+
+.sticky-bottom {
+	position: sticky;
+	bottom: 20px;
+	right: 20px;
+	text-align: right;
+	pointer-events: none;
 }
 
 .hide-whitespace {

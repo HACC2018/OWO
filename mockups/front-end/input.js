@@ -92,6 +92,11 @@ class SelectOption extends HTMLElement {
 
 	set disabled(value) {
 		this._disabled = value;
+		if (this._disabled) {
+			this.setAttribute("disabled", "");
+		} else {
+			this.removeAttribute("disabled");
+		}
 	}
 
 	get disabled() {
@@ -130,6 +135,8 @@ class SelectOption extends HTMLElement {
 							}
 						}
 					}
+				} else if (record.attributeName == "disabled") {
+					this._disabled = this.hasAttribute("disabled");
 				} else {
 					this.updateParent();
 				}
@@ -142,8 +149,8 @@ class CustomSelect extends HTMLElement {
 	constructor() {
 		// Always call super first in constructor
 		super();
-		let self = this;
-		let pickerOpen = false;
+		
+		this.showing = false;
 		let selected = this.getAttribute("selected");
 
 		// Create a shadow root
@@ -152,6 +159,7 @@ class CustomSelect extends HTMLElement {
 		// Create elements
 		let wrapper = document.createElement("div");
 		wrapper.className = "wrapper";
+		this.wrapper = wrapper;
 		let display = document.createElement("div");
 		display.className = "display";
 		let displayLabel = document.createElement("div");
@@ -159,52 +167,29 @@ class CustomSelect extends HTMLElement {
 		this.displayLabel = displayLabel;
 		let arrow = document.createElement("div");
 		arrow.className = "arrow";
+		let pickerUnderlay = document.createElement("div");
+		pickerUnderlay.className = "picker-underlay";
+		pickerUnderlay.style.display = "none";
+		this.pickerUnderlay = pickerUnderlay;
 		let picker = document.createElement("div");
 		picker.className = "picker";
 		picker.style.display = "none";
 		this.picker = picker;
-
-		let items = [
-			{name: "Items of Interest", disabled: true, items: [
-				{name: "Starbucks Cups"},
-				{name: "Plastic To-Go Cups"},
-				{name: "Wax Paper Cups"},
-				{name: "Compostable Take-Out"},
-				{name: "Straws"}
-			]},
-			{name: "Paper", disabled: true, items: [
-				{name: "Recyclable Paper", items: [
-					{name: "Subcategory 2", items: [
-						{name: "Subcategory 3"}
-					]}
-				]},
-				{name: "Shredded Paper"},
-				{name: "Non-Recyclable Paper"},
-				{name: "Paper Towels"}
-			]},
-			{name: "Plastic", disabled: true, items: [
-				{name: "Non HI-5 recyclable plastic containers (1 & 2s)"},
-				{name: "HI-5 recyclable plastic containers (1 & 2s)"},
-				{name: "Food wrappers (chip bags, bar wrappers, ziplocks)"},
-				{name: "Plastic food containers"},
-				{name: "Other Plastic"}
-			]},
-			{name: "Glass", disabled: true, items: [
-				{name: "HI-5 Glass Bottles and Containers"},
-				{name: "Non-HI-5 Glass"}
-			]},
-			{name: "Metals", disabled: true, items: [
-				{name: "Recyclable metals (pineapple and coconut h20)"},
-				{name: "Non-recyclable"},
-				{name: "Aluminum cans"}
-			]}
-		];
-
+		
 		this.buildList();
 
-		display.addEventListener("click", (event) => {
-			pickerOpen = !pickerOpen;
-			picker.style.display = pickerOpen ? "block" : "none";
+		// This is a memory leak, because the event listener is never removed
+		pickerUnderlay.addEventListener("mousedown", () => {
+			this.hide();
+		});
+
+		// This is a memory leak, because the event listener is never removed
+		display.addEventListener("click", () => {
+			if (this.showing) {
+				this.hide();
+			} else {
+				this.show();
+			}
 		});
 
 		let style = document.createElement("style");
@@ -252,7 +237,17 @@ class CustomSelect extends HTMLElement {
 	border-radius: 0 0 4px 4px;
 	background: #FFF;
 	z-index: 999999;
+	overflow-y: auto;
 	box-sizing: border-box;
+}
+
+.picker-underlay {
+	position: fixed;
+	top: -50vh;
+	left: -50vw;
+	width: 200vw;
+	height: 200vh;
+	z-index: 999998;
 }
 
 .item {
@@ -282,6 +277,7 @@ class CustomSelect extends HTMLElement {
 		wrapper.appendChild(display);
 		display.appendChild(displayLabel);
 		display.appendChild(arrow);
+		wrapper.appendChild(pickerUnderlay);
 		wrapper.appendChild(picker);
 
 		let observer = new MutationObserver((records, observer) => this.observed(records, observer));
@@ -290,11 +286,74 @@ class CustomSelect extends HTMLElement {
 	}
 
 	connectedCallback() {
+		let fill = () => {
+			while (this.firstChild) {
+				this.removeChild(this.firstChild);
+			}
+			
+			for (let i = 0; i < window.categoryData.length; i++) {
+				let parent = window.categoryData[i];
+
+				let optionGroup = document.createElement("select-option-group");
+				optionGroup.setAttribute("text", parent.name);
+
+				for (let j = 0; j < parent.items.length; j++) {
+					let option = document.createElement("select-option");
+					option.innerText = parent.items[j];
+					optionGroup.appendChild(option);
+				}
+
+				this.appendChild(optionGroup);
+			}
+		};
+		
+		if (window.categoryData) {
+			fill();
+		} else {
+			let fillCallback;
+			
+			fillCallback = () => {
+				window.removeEventListener("categories-loaded", fillCallback);
+				fill();
+			};
+			
+			window.addEventListener("categories-loaded", fillCallback);
+		}
+		
 		this.buildList();
 	}
+	
+	show() {
+		let rectangle = this.wrapper.getBoundingClientRect();
+		let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		let pickerHeight = viewportHeight - rectangle.bottom;
+		let bodyHeight = document.body.getBoundingClientRect().height;
 
+		this.picker.style.display = "block";
+		this.picker.style.height = `${pickerHeight}px`;
+		this.pickerUnderlay.style.display = "block";
+		
+		if (viewportHeight < bodyHeight) {
+			document.body.style.overflow = "hidden";
+			document.body.style.paddingRight = "17px";
+		}
+		
+		this.showing = true;
+	}
+	
+	hide() {
+		this.picker.style.display = "none";
+		this.pickerUnderlay.style.display = "none";
+		document.body.style.overflow = "";
+		document.body.style.paddingRight = "";
+		this.showing = false;
+	}
+	
 	buildList() {
 		while (this.picker.firstChild) {
+			if (this.picker.firstChild.clickCallback) {
+				this.picker.firstChild.removeEventListener("click", this.picker.firstChild.clickCallback);
+			}
 			this.picker.removeChild(this.picker.firstChild);
 		}
 
@@ -306,12 +365,18 @@ class CustomSelect extends HTMLElement {
 			itemOption.innerText = isGroup ? item.text : item.innerText;
 			itemOption.style.paddingLeft = (15 * depth) + "px";
 			itemOption.selectOption = item;
-
-			itemOption.addEventListener("click", () => {
+			
+			let clickCallback = () => {
+				if (item.tagName == "SELECT-OPTION-GROUP" || item.disabled) {
+					return;
+				}
+				
 				this.selectOption(itemOption.selectOption);
-				this.picker.style.display = "none";
-			});
-
+				this.hide();
+			};
+			itemOption.clickCallback = clickCallback;
+			itemOption.addEventListener("click", clickCallback);
+			
 			this.picker.appendChild(itemOption);
 
 			if (item.selected) {
@@ -321,6 +386,7 @@ class CustomSelect extends HTMLElement {
 			if (isGroup || item.disabled) {
 				itemOption.style.color = "#999";
 				itemOption.className = "item disabled";
+				itemOption.setAttribute("disabled", "");
 			}
 
 			if (isGroup) {
@@ -412,6 +478,14 @@ class CategoryBag extends HTMLElement {
 		inputVolume.className = "data-content";
 		inputVolume.setAttribute("placeholder", "Volume");
 		inputVolume.style.width = "100%";
+		
+		del.addEventListener("click", () => {
+			if (this.parentElement !== null) {
+				if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+					this.parentElement.removeChild(this);
+				}
+			}
+		});
 
 		wrapper.appendChild(del);
 		del.appendChild(delspan);
@@ -500,6 +574,19 @@ class CategoryBox extends HTMLElement {
 		buttonspan.className = "icon mdi mdi-plus";
 
 		let buttonLabel = document.createTextNode("Bag");
+		
+		del.addEventListener("click", () => {
+			if (this.parentElement !== null) {
+				if (this.parentElement.nodeType == document.ELEMENT_NODE) {
+					this.parentElement.removeChild(this);
+				}
+			}
+		});
+		
+		button.addEventListener("click", () => {
+			let bag = document.createElement("category-bag");
+			bagContainer.appendChild(bag);
+		});
 
 		wrapper.appendChild(del);
 		del.appendChild(delspan);
@@ -530,7 +617,6 @@ class CategoryBox extends HTMLElement {
 	}
 
 	numberBags() {
-		console.log(this.bagContainer.children);
 		for (let i = 0; i < this.bagContainer.children.length; i++) {
 			let bag = this.bagContainer.children[i];
 
@@ -541,10 +627,14 @@ class CategoryBox extends HTMLElement {
 	observed(records, observer) {
 		for (let i = 0; i < records.length; i++) {
 			let record = records[i];
-			console.log(record);
-
+			
 			if (record.type == "childList") {
-				this.numberBags();
+				if (this.bagContainer.children.length == 0) {
+					let bag = document.createElement("category-bag");
+					this.bagContainer.appendChild(bag);
+				} else {
+					this.numberBags();
+				}
 			}
 		}
 	}
