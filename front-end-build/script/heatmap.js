@@ -51,7 +51,20 @@ function changeOpacity() {
 }
 
 // Heatmap data: 1 Point for each Building
+// Add extra point for "more trash"
 function getPoints() {
+  // idk what to do w/ these variables yet
+  var QLC = new google.maps.LatLng(21.3003437, -157.8183036);
+  var webster = new google.maps.LatLng(21.3001962, -157.8185224);
+  var shidler = new google.maps.LatLng(21.3005778, -157.8204599);
+  var sinclair = new google.maps.LatLng(21.2986725, -157.8206569);
+  var hamilton = new google.maps.LatLng(21.3005079, -157.816839);
+  var kennedy = new google.maps.LatLng(21.2985384, -157.8171935);
+  var kuykendall = new google.maps.LatLng(21.2976342, -157.8170038);
+  var sakamaki = new google.maps.LatLng(21.2966728, -157.8172046);
+  var dorms = new google.maps.LatLng(21.2954775, -157.8160054);
+
+  // If trash exceeds a certain point, add another point at building
   return [
     new google.maps.LatLng(21.3003437, -157.8183036),  // QLC
     new google.maps.LatLng(21.3003437, -157.8183037),  // QLC
