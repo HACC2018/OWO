@@ -2,7 +2,7 @@
 This group was formed to compete in the HACC 2018 event to create an app to help solve issues with Waste Auditing at the University of Hawaii at Manoa.
 
 # Inspiration
-Nicole Chatterson, the Campus as a Living Lab Coordinator at the UH System Office of Sustainability brought a significant problem to our attention. In her efforts to perform waste audits around campus, she realized how inefficient the process of manually inputting the data from an audit into Excel. 
+Nicole Chatterson, the Campus as a Living Lab Coordinator at the UH System Office of Sustainability brought a significant problem to our attention. In her efforts to perform waste audits around campus, she realized how inefficient the process of manually inputting data collected from an audit into Excel was.
 
 # What it does
 The OWO app allows users to input data collected at their waste audit and see it visualized in real time. Data can be sorted by building, type of waste, category, and amount. 
