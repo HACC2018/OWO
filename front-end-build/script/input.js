@@ -498,8 +498,8 @@ class CategoryBag extends HTMLElement {
 
 		let style = document.createElement("style");
 		style.textContent = `
-@import "global.css";
-@import "input.css";
+@import "style/global.css";
+@import "style/input.css";
 @import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 
@@ -602,8 +602,8 @@ class CategoryBox extends HTMLElement {
 
 		let style = document.createElement("style");
 		style.textContent = `
-@import "global.css";
-@import "input.css";
+@import "style/global.css";
+@import "style/input.css";
 @import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
 `;
 

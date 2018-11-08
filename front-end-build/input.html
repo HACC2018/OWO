@@ -6,13 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
-<!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
 		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
-		<link href="global.css" rel="stylesheet">
-		<link href="input.css" rel="stylesheet">
+		<link href="style/global.css" rel="stylesheet">
+		<link href="style/input.css" rel="stylesheet">
 		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-firestore.js"></script>
-		<script src="input.js"></script>
+		<script src="script/input.js"></script>
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				// Initialize Firebase
@@ -47,12 +46,12 @@
 	</head>
 	<body>
 		<div class="header">
-			<div class="item brand">Oʻahu Waste Organization</div>
-			<div class="item">Events</div>
-			<div class="item">About</div>
-			<div class="item">Learn More</div>
-			<div class="item" style="right: 0">Login</div>
-			<!-- Organizing our Waste on Oʻahu -->
+			<div class="item brand"><img src="image/logo_white.png"></div>
+			<a href="index.html" class="item">Home</a>
+			<a href="events.html" class="item">Events</a>
+			<a href="highcharts.html" class="item">Charts and Graphs</a>
+			<a href="heatmap.html" class="item">Heat Map</a>
+			<a href="about.html" class="item">About</a>
 		</div>
 		<div class="content">
 			<div class="hide-whitespace">
