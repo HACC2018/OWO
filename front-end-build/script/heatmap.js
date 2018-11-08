@@ -4,7 +4,6 @@ function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 16,
 		center: { lat: 21.3003437, lng: -157.8183039 },
-		mapTypeId: 'satellite'
 	});
 
 	// Set radius to reflect trash per building

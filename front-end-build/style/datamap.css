@@ -1,17 +1,18 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
+
+button {
+	min-width: 0px;
+	font-size: 12px;
+}
+
 #map {
-  height: 100%;
+	height: calc(100% - var(--header-height));
 }
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-button {
-  min-width: 0px;
-  font-size: 12px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
