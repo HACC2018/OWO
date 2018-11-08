@@ -52,22 +52,10 @@ function changeOpacity() {
 // Heatmap data: 1 Point for each Building
 // Add extra point for "more trash"
 function getPoints() {
-	// idk what to do w/ these variables yet
-	var QLC = new google.maps.LatLng(21.3003437, -157.8183036);
-	var webster = new google.maps.LatLng(21.3001962, -157.8185224);
-	var shidler = new google.maps.LatLng(21.3005778, -157.8204599);
-	var sinclair = new google.maps.LatLng(21.2986725, -157.8206569);
-	var hamilton = new google.maps.LatLng(21.3005079, -157.816839);
-	var kennedy = new google.maps.LatLng(21.2985384, -157.8171935);
-	var kuykendall = new google.maps.LatLng(21.2976342, -157.8170038);
-	var sakamaki = new google.maps.LatLng(21.2966728, -157.8172046);
-	var dorms = new google.maps.LatLng(21.2954775, -157.8160054);
 
 	// If trash exceeds a certain point, add another point at building
 	return [
-		new google.maps.LatLng(21.3003437, -157.8183036),  // QLC
-		new google.maps.LatLng(21.3003437, -157.8183037),  // QLC
-		new google.maps.LatLng(21.3003437, -157.8183038),  // QLC
+
 		new google.maps.LatLng(21.3003437, -157.8183039),  // QLC
 		new google.maps.LatLng(21.3001962, -157.8185224),  // Webster
 		new google.maps.LatLng(21.3005778, -157.8204599),  // Shidler
@@ -77,6 +65,21 @@ function getPoints() {
 		new google.maps.LatLng(21.2985384, -157.8171935),  // Kennedy
 		new google.maps.LatLng(21.2976342, -157.8170038),  // Kuykendall
 		new google.maps.LatLng(21.2966728, -157.8172046),  // Sakamaki
+		new google.maps.LatLng(21.2998957,-157.8189337),   // Crawford
+		new google.maps.LatLng(21.2974888, -157.8207703),   // Sinclair Bus Stop
+		new google.maps.LatLng(21.2974888,-157.8207703),   // University + Dole Bus Stop
+		new google.maps.LatLng(21.2978686,-157.8196653),   // Lower Campus Bus Stop
+		new google.maps.LatLng(21.2966991,-157.8169509),   // Dole St. Bus Stop
+		new google.maps.LatLng(21.2962767,-157.8161571),   // Dorm Bus Stop
+		new google.maps.LatLng(21.298164,-157.8156412),   // East West Bus Stop
+		new google.maps.LatLng(21.3004329,-157.8155577),   // Lincoln Hall Bus Stop
+		new google.maps.LatLng(21.3004329,-157.8155577),   // Paradise Palms Bus Stop
+		new google.maps.LatLng(21.3007086,-157.8191234),   // Upper Campus Bus Stop
+		new google.maps.LatLng(21.2986022,-157.8190096),   // UHM Bookstore
+		new google.maps.LatLng(21.2982064,-157.8183116),   // CC Food Court
+		new google.maps.LatLng(21.2992596,-157.8175757),   // East West
+		new google.maps.LatLng(21.2975703,-157.8157095),   // Art Bldg
 		new google.maps.LatLng(21.2954775, -157.8160054)   // Dorms
+
 	];
 }
