@@ -104,6 +104,8 @@ hr {
 }
 
 .header {
+	position: fixed;
+	width: 100%;
 	display: flex;
 	height: var(--header-height);
 	padding: 0 40px;
@@ -113,6 +115,11 @@ hr {
 	line-height: var(--header-height);
 	font-size: 18px;
 	box-shadow: 0 2px 6px 0 rgba(60, 64, 67, .15);
+	box-sizing: border-box;
+}
+
+.header-placeholder {
+	height: var(--header-height);
 }
 
 .header .item {
