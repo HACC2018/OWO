@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Audit Data - OWO</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400" rel="stylesheet">
+<!--		<link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">-->
+		<link href="https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="global.css" rel="stylesheet">
+		<link href="input.css" rel="stylesheet">
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-firestore.js"></script>
+		<script src="input.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// Initialize Firebase
+				let config = {
+					apiKey: "AIzaSyDdyNdBVENgTrOXeUPAXn0jOI_maCPZaCs",
+					authDomain: "oooooo-1cb0d.firebaseapp.com",
+					databaseURL: "https://oooooo-1cb0d.firebaseio.com",
+					projectId: "oooooo-1cb0d",
+					storageBucket: "oooooo-1cb0d.appspot.com",
+					messagingSenderId: "928900583874"
+				};
+				firebase.initializeApp(config);
+
+				let db = firebase.firestore();
+				db.settings({timestampsInSnapshots: true});
+				
+				let categoryDocRef = db.collection("global").doc("categories");
+				
+				categoryDocRef.get().then((categoryDoc) => {
+					if (categoryDoc.exists) {
+						window.categoryData = categoryDoc.data().categories;
+						window.dispatchEvent(new Event("categories-loaded"));
+					}
+				});
+				
+				document.getElementById("new-category").addEventListener("click", () => {
+					let category = document.createElement("category-box");
+					document.getElementById("category-container").appendChild(category);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="item brand">Oʻahu Waste Organization</div>
+			<div class="item">Events</div>
+			<div class="item">About</div>
+			<div class="item">Learn More</div>
+			<div class="item" style="right: 0">Login</div>
+			<!-- Organizing our Waste on Oʻahu -->
+		</div>
+		<div class="content">
+			<div class="hide-whitespace">
+				<div class="half">
+					<h2>Location</h2>
+					<div class="data-content">University of Hawaiʻi at Mānoa</div>
+					<h2>Building</h2>
+					<div class="data-content">Queen Liliʻuokalani Center for Student Services</div>
+				</div>
+				<div class="right half">
+					<h2>Date</h2>
+					<div class="data-content">Thursday, October 25, 2018</div>
+					<h2>Bucket Tare</h2>
+					<input class="data-content right" placeholder="Bucket Tare">
+				</div>
+				<h2>Notes</h2>
+				<textarea class="data-content" style="max-width: 100%; min-width: 100%; width: 100%; min-height: 72px;" placeholder="Notes"></textarea>
+			</div>
+			<div id="category-container"><category-box></category-box></div>
+			<div class="sticky-bottom">
+				<button id="new-category" class="fab icon">
+					<div class="button-content">
+						<div class="icon mdi mdi-plus" style="margin-right: 5px; font-size: 28px;"></div>
+						<span style="font-size: 24px;">/</span>
+						<div class="icon mdi mdi-magnify" style="margin-left: 7px; font-size: 24px"></div>
+						Category
+					</div>
+				</button>
+			</div>
+		</div>
+		<div class="footer">
+			Oʻahu Waste Organization
+			<hr>
+			A team project for HACC 2018
+		</div>
+	</body>
+</html>
